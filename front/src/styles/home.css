@@ -1,0 +1,75 @@
+body{
+    font-family: 'Titillium Web', sans-serif;
+}
+#homeContainer{
+    min-height: 100vh;
+    flex-direction: column;
+   /* background-color: #edf7f6; */
+    background-image: url(https://s2.best-wallpaper.net/wallpaper/1600x900/1805/Lot-of-books-in-library_1600x900.jpg);
+    background-size: cover;
+    
+}
+#searchBar{
+    border-radius: 0.3em ;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 0.1em solid #464655;
+    width: 20vw; 
+    background-color: #edf7f6;
+    font-family: 'Karla', sans-serif;
+    
+}
+
+.hidde{
+    display: none;
+}
+
+#searchButton{
+    border-radius: 8px;
+    border-style: 0.5rem solid #da2f2f;
+    background-color: #024972;
+    color : #edf7f6;
+    font-weight: bolder;
+    font-family: 'Karla', sans-serif;
+
+}
+
+.disabled{
+    background-color: #a1b6b5 !important;
+    color: black !important;
+    font-weight:bold ;
+
+}
+.initialBtns{
+    border-radius: 17px;
+    background-color: #dfeef7;
+    border: 0.1em solid #ffffff;
+    color : #024972;
+    margin: 0.3rem;
+}
+#slogan{
+    font-size: 5vw;
+    font-weight: bolder;
+    color: white;
+    padding-bottom: 0.2em;
+    background-color: #024972;
+    border-radius: 0.5rem;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+}
+#homecontainer{
+    min-width: 100%;
+    padding: 0;
+}
+body{
+    padding: 0 !important;
+}
+input{
+    font-family: 'Karla', sans-serif;
+}
+#token{
+    font-size: 0.4rem;
+    font-family: 'Karla', sans-serif;
+
+}

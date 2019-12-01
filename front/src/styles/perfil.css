@@ -1,0 +1,76 @@
+.perfil{
+    position: fixed;
+    top: 0%;
+    left: 15%;
+    width: 85%;
+    background-color: #edf7f6;
+    height: 100%;
+}
+
+.perfil_card{
+    width: 61vw;
+    margin: 6% 0% 0% 14%;
+    border-width: 6px;
+    background-color: #edf7f6;
+}
+.perfil_img{width: 12vw;padding: 10% 0% 10%;}
+.perfil_body{padding: 2rem !important;}
+.perfil_title{
+    font-size: 5vw;
+}
+.perfil_text1{margin: 0;font-size: 2vw; font-family: 'Karla', sans-serif}
+.perfil_text2{margin: 0;font-size: 1.5vw; font-family: 'Karla', sans-serif; color: #464655}
+.btn-success{background-color: #024972; margin-bottom: 6px;}
+.btn-success:hover{background-color: #00c0be}
+
+.comentarios{
+    margin: 2% 0% 0% 14%;
+    border: 6px solid rgba(0,0,0,.125);
+    border-radius: .45rem;
+    width: 61vw;
+}
+.scrollspy-example{
+    max-height:22.4vw;
+    overflow-y: auto;
+    padding-left: 2%;
+    width: 98%;
+}
+
+.scrollspy-example h4{font-size: 1.5vw; font-family: 'Karla', sans-serif}
+.scrollspy-example p{font-size: 1vw; font-family: 'Karla', sans-serif}
+
+#list-example{width: 9vw; overflow-y: scroll; max-height: 22.4vw;}
+.list-group-item-action{padding: 1vw 1.25vw; font-size: 1vw}
+.comentario{padding: 0 12px;}
+.info-comentario{
+    margin: 12px 0 12px 0;
+    border: 2px solid rgba(0,0,0,.125);
+}
+.reseña-title{font-size: 1.8vw}
+.boton-comentario{
+    margin-top: 12px;
+}
+
+
+@media (max-width: 768px) {
+    .perfil{left: 0%;width: 100%}
+    .perfil_card{width: 75vw;margin: 8% 0% 0% 10%;}
+    .perfil_img{width: 17vw;margin: 8% 0%}
+    .perfil_body{padding: 1.5rem !important;}
+    .perfil_title{font-size: 5vw}
+    .perfil_text1{margin: 0;font-size: 3vw; font-family: 'Karla', sans-serif}
+    .perfil_text2{margin: 0;font-size: 2vw; font-family: 'Karla', sans-serif; color: #464655}
+
+    .scrollspy-example{
+        max-height:42vw;
+        padding-left: 2%;
+    }
+    .reseña-title{font-size: 2.6vw}
+    .comentarios{margin: 2% 0% 0% 10%;width: 75vw}
+    .scrollspy-example h4{font-size: 2.5vw;}
+    .scrollspy-example p{font-size: 1.8vw;}
+
+    #list-example{width: 9vw;height: 32vw;}
+    .list-group-item-action{padding: 1.5vw 1.25vw; font-size: 1.5vw}
+}
+

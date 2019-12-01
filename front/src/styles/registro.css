@@ -1,0 +1,13 @@
+.validation{
+    color: #024972;
+    font-family: 'Karla', sans-serif;
+    font-size: 75%;
+}
+
+#but{
+    display: block;
+    background-color: #024972;
+    border-color: #024972;
+    font-family: 'Karla', serif;
+}
+

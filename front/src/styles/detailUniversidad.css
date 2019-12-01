@@ -1,0 +1,54 @@
+.cUniversidad{
+    height : 10em;
+    transition: all .9s;
+}   
+.linkuniversidad{
+  color: black !important;
+  text-decoration: none !important;
+}
+p{
+  font-size:15px;
+}
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+  padding-top: 5px;
+}
+.info{
+  padding: 0px;
+}
+.LogoUniversidad{
+    width: 50px;
+    height: 50px;
+}
+.cUniversidad:hover{
+  background-color: #f9faff;
+  cursor:pointer;
+  box-shadow: 0 3px 3px #b4b4b4;
+}
+.detailUniversidad-info p{font-size: 1vw}
+.nombreuniversidad{font-size: 1.1vw}
+
+@media only screen and (max-width: 500px) {
+    .Universidad {
+      width: 99% !important;
+    }
+    .cUniversidad{
+      height: 9em ;
+  }
+  .LogoUniversidad{
+    width: 41px;
+    height: 41px;
+}
+}
+
+@media (max-width: 768px) {
+    .nombreuniversidad{font-size: 1.8vw}
+    .detailUniversidad-info p{font-size: 1.5vw}
+    .cUniversidad{
+      height: 9.7em ;
+  }
+}
+
+
