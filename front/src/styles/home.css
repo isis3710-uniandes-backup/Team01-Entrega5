@@ -5,7 +5,7 @@ body{
     min-height: 100vh;
     flex-direction: column;
    /* background-color: #edf7f6; */
-    background-image: url(https://s2.best-wallpaper.net/wallpaper/1600x900/1805/Lot-of-books-in-library_1600x900.jpg);
+    background-image: url("../assets/imgs/home.jpg");
     background-size: cover;
     
 }
@@ -32,7 +32,7 @@ body{
     color : #edf7f6;
     font-weight: bolder;
     font-family: 'Karla', sans-serif;
-
+    margin-left: 6px;
 }
 
 .disabled{

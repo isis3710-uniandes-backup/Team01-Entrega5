@@ -222,18 +222,18 @@ export default class home extends Component {
 
                     <h1 id="slogan">Decide lo mejor para tu futuro.</h1>
                     <form>
-                        <div className="form-group">
+                        <div className="form-row">
                             <input type="text" id="searchBar" placeholder="Busca tu programa de interés" list="options" onChange={this.saveSearch} aria-label="Barra de busqueda de programas"></input>
                             <datalist id="options">
                                 {this.state.programsByArea.map((e, i) =>
                                     e.results.map((element, i) => <option key={i} value={element.title}>{e.name}</option>)
                                 )}
                             </datalist>
-                        </div>
-                        <Link className="btn disabled" id="searchButton" aria-disabled="true" tabIndex="-1" onClick={this.search} to={{
+                            <Link className="btn disabled" id="searchButton" aria-disabled="true" tabIndex="-1" onClick={this.search} to={{
                               pathname : `carreras/`,
                             state: {}
                         }}>Buscar</Link>
+                        </div>
                     </form>
                 </div>
             </div>

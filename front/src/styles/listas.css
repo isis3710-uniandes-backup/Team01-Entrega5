@@ -79,6 +79,7 @@ p{
     color :#024972;
     border: 0.1em solid #c3d2db;
     background-color: #dfeef7;
+    float: right;
 
 }
 @media (max-width: 768px) {
