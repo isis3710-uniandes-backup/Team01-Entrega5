@@ -209,8 +209,8 @@ export default class home extends Component {
                         </div>
                         :
                         <div className="form-inline">
-                            <button className="btn initialBtns" onClick={this.showToken}>Token</button>
-                        <Link to="/carreras">
+{/*                             <button className="btn initialBtns" onClick={this.showToken}>Token</button>
+ */}                        <Link to="/carreras">
                             <button className="btn initialBtns">Explorar</button>
                         </Link>
                         <button className="btn initialBtns" onClick={this.closeSession}>Cerrar sesión</button>
@@ -231,8 +231,7 @@ export default class home extends Component {
                             </datalist>
                         </div>
                         <Link className="btn disabled" id="searchButton" aria-disabled="true" tabIndex="-1" onClick={this.search} to={{
-                          //  pathname: `/programas/${this.state.valueSearched}`,
-                          pathname : `carreras/`,
+                              pathname : `carreras/`,
                             state: {}
                         }}>Buscar</Link>
                     </form>

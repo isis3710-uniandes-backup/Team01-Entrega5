@@ -57,7 +57,7 @@ p{
     padding-right: 15px;
     padding-left: 15px;
     margin-bottom: 0.3em;
-
+    padding-bottom: 8px;
 }
 .searchprogramInput__Container{
     background-color: #f2f6f7;
@@ -73,6 +73,13 @@ p{
 }
 .MuiSlider-root{
     color: #007dc6 !important;
+}
+.btnStats{
+    font-size: 13px;
+    color :#024972;
+    border: 0.1em solid #c3d2db;
+    background-color: #dfeef7;
+
 }
 @media (max-width: 768px) {
     .listas{

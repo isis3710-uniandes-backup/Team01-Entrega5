@@ -139,7 +139,8 @@ export default class Listas extends Component {
                                         />
                                     </div>
                                     <div className="col-md-6 col-xl-6 col-12 ">
-                                        <input id="searchprogramInput" className="form-control form-control-sm" type="text" placeholder="Buscar universidad..." onChange={this.changeUniversities} aria-label="Input para buscar una universidad"></input>
+                                        <input className="form-control form-control-sm searchprogramInput" type="text" placeholder="Buscar universidad..." onChange={this.changeUniversities} aria-label="Input para buscar una universidad"></input>
+                                        <button className="btn btnStats">Estadísticas <i className="fas fa-chart-bar"></i></button>
                                     </div>
                                 </div>
                             </div>

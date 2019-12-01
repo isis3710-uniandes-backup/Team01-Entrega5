@@ -21,7 +21,7 @@
     line-height: normal;
 }
 .badge-ingenieria{
-    background-color: #120a57;
+    background-color: #570a34;
     color : white;
     line-height: normal;
 
@@ -32,7 +32,7 @@
     line-height: normal;
 
 }
-.Programa:hover{background-color: #00c0be;cursor:pointer}
+.Programa:hover{background-color: #dfeef7;cursor:pointer}
 .area{
     font-family: 'Karla', 'sans-serif';
     font-size: 0.6em;
