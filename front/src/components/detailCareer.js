@@ -170,7 +170,7 @@ export default class detailCareer extends Component {
                                     <img src={timeImage} className="img-fluid img-responsive img-Little" alt="Duracion de la carrera" />
                                     <strong className="atributosCareer">{this.state.duracion} </strong> <strong className=" cursiveAnotation text-right">semestres.</strong>
                                 </li>
-                                <li className="list-group-item  d-flex justify-content-between align-items-center">
+                                <li className="list-group-item  d-flex justify-content-between align-items-center" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Salario <em>promedio</em>">
                                     <img src={cashImage} className="img-fluid img-responsive img-Little" alt="Duracion de la carrera" />
                                     <p className="atributosCareer">{
                                         formatter.format(this.state.salario)
