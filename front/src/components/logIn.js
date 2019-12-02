@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap'
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/login.css';
@@ -23,62 +23,67 @@ class LogIn extends Component {
         if (this.props.mostrar !== prevProps.mostrar) {
             this.setState({ show: this.props.mostrar });
         }
-    } 
+    }
     logIn() {
-        if (this.state.usuario !== "" && this.state.password !== "") {
+        if (this.state.usuario !== "" && this.state.password !== "") 
+        {
             var data = { _id: this.state.usuario, password: md5(this.state.password) };
-           let urlServer = "http://futureguide.herokuapp.com"
-         // let urlServer = "http://localhost:3001"
-            fetch(urlServer + "/login", {
-                method: 'POST',
-                body: JSON.stringify(data), 
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => res.json())
-            .then(json => {
-                Cookies.set('JSESSIONID', json.token , {expires: 0.125} );
-                Cookies.set('USERNAME', this.state.usuario );
-                if (json) {
-                    toast('¡Bienvenido de nuevo ' + this.state.usuario + ' !', {
-                        containerId : 'A',
-                        position: "bottom-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true
-                    });
-                    this.hideSuccess();
-                } 
-                else {
-                    toast.error('Usuario o contraseña incorrecta. Vuelva a intentarlo', {
-                        containerId : 'A',
-                        position: "top-center",
-                        autoClose: 1500,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true
-                    });
-                }
-            })
-            .catch(error => {
-                toast.error('Usuario o contraseña incorrecta. Vuelva a intentarlo', {
-                    containerId : 'A',
-                    position: "top-center",
-                    autoClose: 1200,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true
-                });
+            let urlServer = "http://futureguide.herokuapp.com"
+            // let urlServer = "http://localhost:3001"
+            if (navigator.onLine) {
+                fetch(urlServer + "/login", {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => res.json())
+                    .then(json => {
+                        Cookies.set('JSESSIONID', json.token, { expires: 0.125 });
+                        Cookies.set('USERNAME', this.state.usuario);
+                        if (json) {
+                            toast('¡Bienvenido de nuevo ' + this.state.usuario + ' !', {
+                                containerId: 'A',
+                                position: "bottom-right",
+                                autoClose: 2000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true
+                            });
+                            this.hideSuccess();
+                        }
+                        else {
+                            toast.error('Usuario o contraseña incorrecta. Vuelva a intentarlo', {
+                                containerId: 'A',
+                                position: "top-center",
+                                autoClose: 1500,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        toast.error('Usuario o contraseña incorrecta. Vuelva a intentarlo', {
+                            containerId: 'A',
+                            position: "top-center",
+                            autoClose: 1200,
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true
+                        });
+                    }
+                    );
             }
-            );
-        } else {
-            toast('Debes llenar todos los campos.', {
-                containerId : 'A',
+        } else 
+        {
+            toast('Debes llenar todos los campos.', 
+            {
+                containerId: 'A',
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: true,
@@ -88,10 +93,12 @@ class LogIn extends Component {
             });
         }
     }
-    hide() {
+    hide() 
+    {
         this.props.cerrar();
     }
-    hideSuccess() {
+    hideSuccess() 
+    {
         this.props.cierreExitoso();
     }
     changeValue(e) {
@@ -111,7 +118,7 @@ class LogIn extends Component {
 
 
             <div>
-        
+
                 <Modal show={this.state.show} onHide={this.hide}>
                     <Modal.Header closeButton>
                         <Modal.Title >¡Vamos de nuevo!</Modal.Title>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import '../styles/registro.css';
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 const md5 = require("md5");
 
 
@@ -52,14 +52,13 @@ export default class register extends Component {
                 username: e.target.value
             }, () => {
                 if (this.state.usernameError === null) {
-                    if (this.state.username.length < 6) 
-                    {
+                    if (this.state.username.length < 6) {
                         this.setState({
                             usernameError: 'Su nombre de usuario debe tener más de 6 caracteres'
                         })
                     }
                 }
-                if(this.state.username.length > 6){
+                if (this.state.username.length > 6) {
 
                     fetch('https://futureguide.herokuapp.com/usuarios/' + this.state.username, {
                         method: 'GET'
@@ -75,10 +74,10 @@ export default class register extends Component {
                             }
                         })
                         .catch(error => {
-                            console.log("Not the user");
+                            console.log(error);
                         })
                 }
-               
+
             });
         }
         else if (e.target.id === "name") {
@@ -125,9 +124,10 @@ export default class register extends Component {
     }
     signUp() {
 
-        try {
-          let checkUsername = false;
-           let checkEmail = false;
+        try 
+        {
+            let checkUsername = false;
+            let checkEmail = false;
             let checkName = false;
             let checkPassword = false;
             if (this.state.username !== "" && this.state.usernameError === null)
@@ -147,31 +147,59 @@ export default class register extends Component {
                     password: md5(this.state.password)
                 };
                 let boddy = JSON.stringify(json);
-                fetch('https://futureguide.herokuapp.com/register', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                      },
-                    body: boddy,
+                if (!navigator.onLine) 
+                {
+                    localStorage.setItem('nuevoUsuario', boddy);
+                    toast('Cuando el internet vuelva, trataremos de registrarte!', {
+                        containerId: 'A',
+                        position: "bottom-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true
+                    });
+                }
+                else 
+                {
+                    fetch('https://futureguide.herokuapp.com/register', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: boddy,
 
-                })
-                .then(res => {
-                        res.json()
-                        if (res.status === 200) {
-                            toast('¡Registro exitoso, ahora ingresa!', {
-                                containerId : 'A',
-                                position: "bottom-right",
-                                autoClose: 2000,
-                                hideProgressBar: false,
-                                closeOnClick: true,
-                                pauseOnHover: true,
-                                draggable: true
-                            });
-                            this.hide();
-                        } else if (res.status === 500) {
-                            toast.error('Lo sentimos, algo fallo en el servidor. Vuelve a intentarlo.', {
-                                containerId : 'A',
+                    })
+                        .then(res => {
+                            res.json()
+                            if (res.status === 200) {
+                                toast('¡Registro exitoso, ahora ingresa!', {
+                                    containerId: 'A',
+                                    position: "bottom-right",
+                                    autoClose: 2000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true
+                                });
+                                this.hide();
+                            } else if (res.status === 500) {
+                                toast.error('Lo sentimos, algo fallo en el servidor. Vuelve a intentarlo.', {
+                                    containerId: 'A',
+                                    position: "top-center",
+                                    autoClose: 1500,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true
+                                });
+                            }
+                        }
+                        )
+                        .catch(error => {
+                            toast.error('Error en el servidor. Vuelve a intentarlo', {
+                                containerId: 'A',
                                 position: "top-center",
                                 autoClose: 1500,
                                 hideProgressBar: false,
@@ -179,26 +207,15 @@ export default class register extends Component {
                                 pauseOnHover: true,
                                 draggable: true
                             });
-                        }
-                    }
-                    )
-                    .catch(error => {
-                        toast.error('Error en el servidor. Vuelve a intentarlo', {
-                            containerId : 'A',
-                            position: "top-center",
-                            autoClose: 1500,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true
                         });
-                    });
+                }
             }
             else {
                 console.error("XD");
             }
 
-        } catch (e) {
+        } catch (e) 
+        {
             console.log(e);
 
         }
@@ -219,7 +236,7 @@ export default class register extends Component {
                                 <Form.Label>Usuario</Form.Label>
 
                                 <Form.Control id="username" required type="text" className={`form-control ${this.state.usernameError ? 'is-invalid register-form-control-username ' : 'register-form-control-username'}`} placeholder="Dinos como quieres que te llamemos... "
-                                    onChange={this.changeValue} title="Username"  aria-label="Username">
+                                    onChange={this.changeValue} title="Username" aria-label="Username">
                                 </Form.Control>
                                 <div className='invalid-feedback'>{this.state.usernameError}</div>
                                 {checkUsername ? <div /> : <strong className="`validation">*Rellena este campo</strong>}

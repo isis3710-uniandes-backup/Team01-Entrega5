@@ -8,6 +8,7 @@ import { Redirect } from "react-router-dom";
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import cap from '../assets/imgs/graduate-cap.png'
+import { toast } from 'react-toastify';
 
 export default class Listas extends Component {
     constructor(props) {
@@ -25,25 +26,61 @@ export default class Listas extends Component {
 
     componentDidMount() {
         let token = Cookies.get("JSESSIONID");
-        if (token) {
-            fetch('https://futureguide.herokuapp.com/programas',
-                {
-                    method: 'GET',
-                    headers: new Headers({
-                        'Authorization': token
-                    })
-                }).then(
-                    resp => resp.json()
-                )
-                .then(json => {
+        if (!navigator.onLine) 
+        {
+            if(localStorage.getItem('programas') === null)
+            {
+                this.setState({
+                    programas : [],
+                    programasTotal : []
+                });
 
-                    this.setState({
-                        programas: json,
-                        programasTotal: json
-                    })
+                toast('No se lograron cargar programas', 
+                {
+                    containerId: 'A',
+                    position: "bottom-right",
+                    autoClose: 2600,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
+
+            }
+            else
+            {
+                let programasAlmacenados = localStorage.getItem('programas');
+                this.setState({
+                    programas: JSON.parse(programasAlmacenados),
+                    programasTotal: JSON.parse(programasAlmacenados)
                 })
+            }
+        }
+        else
+        {
+            if (token) 
+            {
+    
+                fetch('https://futureguide.herokuapp.com/programas',
+                    {
+                        method: 'GET',
+                        headers: new Headers({
+                            'Authorization': token
+                        })
+                    }).then(
+                        resp => resp.json()
+                    )
+                    .then(json => {
+                        localStorage.setItem("programas", JSON.stringify(json));
+                        this.setState({
+                            programas: json,
+                            programasTotal: json
+                        })
+                    })
+            }
         }
     }
+
 
     changePrograms = (e) => {
         this.setState({
@@ -63,43 +100,60 @@ export default class Listas extends Component {
     actualizarUniversidades = (pUniversidades, pNombrePrograma) => {
         let token = Cookies.get("JSESSIONID");
         let universidadesNuevas;
-        if (token) {
-            let urlServer = "https://futureguide.herokuapp.com";
-        //let urlServer = "http://localhost:3001";
-
-            fetch(urlServer + `/programas/${pNombrePrograma}/universidades/detail`, {
-                method: 'GET',
-                headers: new Headers({
-                    'Authorization': token
-                })
-            })
-                .then(res => res.json())
-                .then(json => {
-                    universidadesNuevas = json;
-                    this.setState({
-                        universidades: universidadesNuevas,
-                        universidadesTotal: universidadesNuevas,
-                        nombrePrograma: pNombrePrograma,
-                        programClicked: true
+        if (!navigator.onLine) {
+            if (localStorage.getItem(`universidades${pNombrePrograma}`) === null) {
+                //aun no se que hacer
+            }
+            else {
+                let info = localStorage.getItem(`universidades${pNombrePrograma}`);
+                this.setState({
+                    universidades: JSON.parse(info),
+                    universidadesTotal: JSON.parse(info),
+                    nombrePrograma: pNombrePrograma,
+                    programClicked: true
+                });
+            }
+        }
+        else {
+            if (token) {
+                let urlServer = "https://futureguide.herokuapp.com";
+                //let urlServer = "http://localhost:3001";
+                fetch(urlServer + `/programas/${pNombrePrograma}/universidades/detail`, {
+                    method: 'GET',
+                    headers: new Headers({
+                        'Authorization': token
                     })
                 })
+                    .then(res => res.json())
+                    .then(json => {
+                        universidadesNuevas = json;
+                        localStorage.setItem(`universidades${pNombrePrograma}`, JSON.stringify(json));
+                        this.setState({
+                            universidades: universidadesNuevas,
+                            universidadesTotal: universidadesNuevas,
+                            nombrePrograma: pNombrePrograma,
+                            programClicked: true
+                        })
+                    })
+            }
         }
     }
     changeCosto = (event, newValue) => {
         this.setState({
             costoRange: newValue,
-            universidades : this.state.universidadesTotal.filter(element => {
-                if(element.costo !== 'Basado en estrato social'){
-                    return ((element.costo <= (newValue[1]*1000000) ) && (element.costo >= (newValue[0]*1000000)))
+            universidades: this.state.universidadesTotal.filter(element => {
+                if (element.costo !== 'Basado en estrato social') {
+                    return ((element.costo <= (newValue[1] * 1000000)) && (element.costo >= (newValue[0] * 1000000)))
                 }
-                else{
+                else {
                     return true;
                 }
             })
         });
-    };
+    }
 
     render() {
+        console.log(this.state);
         let token = Cookies.get("JSESSIONID");
         if (!token) {
             return <Redirect to='/' />

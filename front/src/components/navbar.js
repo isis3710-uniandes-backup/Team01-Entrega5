@@ -11,10 +11,12 @@ export default class navbar extends Component {
     state = {
         logIn: false,
         alredyLogged: false,
+        internet : false,
         universidades: []
     };
 
-    reseña() {
+    reseña() 
+    {
         Swal.mixin({
             input: 'text',
             confirmButtonText: 'Siguiente &rarr;',
@@ -64,12 +66,23 @@ export default class navbar extends Component {
             }
         })
     }
-    componentDidMount() {
-        let token = Cookies.get("JSESSIONID");
-        if (token) {
+    componentDidMount() 
+    {
+        if(navigator.onLine){
+            let token = Cookies.get("JSESSIONID");
+            if (token) {
+                this.setState({
+                    alredyLogged: true,
+                    internet : true
+                });
+            }
+        }
+        else
+        {
             this.setState({
-                alredyLogged: true
-            });
+                alredyLogged : true,
+                internet : false
+            })
         }
     }
 

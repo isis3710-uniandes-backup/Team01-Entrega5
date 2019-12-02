@@ -7,6 +7,8 @@ import LogIn from './logIn';
 import Cookies from 'js-cookie';
 import { ToastContainer } from 'react-toastify';
 import homeImage from '../assets/imgs/home.jpg';
+import { toast } from 'react-toastify';
+
 
 export default class home extends Component {
 
@@ -132,50 +134,71 @@ export default class home extends Component {
        
     };
 
-    componentDidMount() {
+    componentDidMount() 
+    {
         if(this.props.location.state)
         {
             this.closeSession();
         }
-        let token = Cookies.get("JSESSIONID");
-        if (token) {
+        if(navigator.onLine)
+        {
+            alert("Hey");
+            let token = Cookies.get("JSESSIONID");
 
-            fetch("https://futureguide.herokuapp.com/programas/area", {
-                method: 'GET',
-                headers: new Headers({
-                    'Authorization': token
+            if (token) {
+                fetch("https://futureguide.herokuapp.com/programas/area", 
+                {
+                    method: 'GET',
+                    headers: new Headers({
+                        'Authorization': token
+                    })
                 })
-            })
-                .then(res => res.json())
-                .then(json => {
-                    if (json.success === false) {
-                        this.setState({
-                            alreadyLogged : false
-                        }, () => {
-                            Cookies.remove('JSESSIONID');
-                        });
-                    }
-                    else {
-                        let objectFinal = [];
-                        json.forEach(element => {
-                            objectFinal.push({
-                                name: element._id,
-                                results: element.programs
-                            })
-                        });
-                        this.setState({
-                            programsByArea: objectFinal,
-                            programsBackUp: objectFinal,
-                            alreadyLogged: true
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                })
+                    .then(res => res.json())
+                    .then(json => {
+                        if (json.success === false) {
+                            this.setState({
+                                alreadyLogged : false
+                            }, () => {
+                                Cookies.remove('JSESSIONID');
+                            });
+                        }
+                        else 
+                        {
+                            let objectFinal = [];
+                            json.forEach(element => {
+                                objectFinal.push({
+                                    name: element._id,
+                                    results: element.programs
+                                })
+                            });
+                            this.setState({
+                                programsByArea: objectFinal,
+                                programsBackUp: objectFinal,
+                                alreadyLogged: true
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
         }
-        else {
-            console.log("Loguese");
+        else 
+        {
+            this.setState({
+                alreadyLogged : true
+            });
+            toast('No hay internet pero puedes acceder a nuestro contenido', 
+            {
+                containerId: 'A',
+                position: "bottom-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+
         }
     }
 
