@@ -27,32 +27,70 @@ export default class detailCareer extends Component {
     }
 
     componentDidMount() {
-        let token = Cookies.get("JSESSIONID");
-        if (token) {
-            let { nombre, name } = this.props.match.params;
-            nombre = nombre.replace("+", "");
-            nombre = nombre.replace("+", "");
-            fetch(`https://futureguide.herokuapp.com/carrera/${nombre.toUpperCase()}/${name.toUpperCase()}`, {
-                method: 'GET',
-                headers: new Headers({
-                    'Authorization': token
+        let { nombre, name } = this.props.match.params;
+
+        if(!navigator.onLine)
+        {
+            if(localStorage.getItem(`u${nombre}p${name}`) === null)
+            {
+                this.setState({
+                    universidad: "NaN",
+                    programa: "Nan",
+                    costo: 0,
+                    duracion: 0,
+                    altaCalidad: false,
+                    acreditacionInternacional: "NaN",
+                    salario: 0,
+                    videos: [],
+                    comentarios: []
+                });
+            }
+            else
+            {
+                let info = JSON.parse(localStorage.getItem(`u${nombre}p${name}`));
+                this.setState({
+                    universidad: nombre,
+                    programa: name,
+                    costo: info.costo,
+                    duracion: info.duracion,
+                    altaCalidad: info.altaCalidad,
+                    acreditacionInternacional: info.acreditacionInternacional,
+                    salario: info.salario,
+                    videos: info.videos,
+                    comentarios: info.comentarios
                 })
             }
-            )
-                .then(res => res.json())
-                .then(json => {
-                    this.setState({
-                        universidad: nombre,
-                        programa: name,
-                        costo: json.costo,
-                        duracion: json.duracion,
-                        altaCalidad: json.altaCalidad,
-                        acreditacionInternacional: json.acreditacionInternacional,
-                        salario: json.salario,
-                        videos: json.videos,
-                        comentarios: json.comentarios
+        }
+        else
+        {
+            let token = Cookies.get("JSESSIONID");
+            if (token) 
+            {
+                nombre = nombre.replace("+", "");
+                nombre = nombre.replace("+", "");
+                fetch(`https://futureguide.herokuapp.com/carrera/${nombre.toUpperCase()}/${name.toUpperCase()}`, {
+                    method: 'GET',
+                    headers: new Headers({
+                        'Authorization': token
                     })
-                })
+                }
+                )
+                    .then(res => res.json())
+                    .then(json => {
+                        localStorage.setItem(`u${nombre}p${name}`, JSON.stringify(json));
+                        this.setState({
+                            universidad: nombre,
+                            programa: name,
+                            costo: json.costo,
+                            duracion: json.duracion,
+                            altaCalidad: json.altaCalidad,
+                            acreditacionInternacional: json.acreditacionInternacional,
+                            salario: json.salario,
+                            videos: json.videos,
+                            comentarios: json.comentarios
+                        })
+                    })
+            }
         }
     }
 
@@ -236,7 +274,8 @@ export default class detailCareer extends Component {
                         </div>
                         <div className="row boton">
                             <div className="col-12 text-center">
-                                <button type="button" className="btn btnNewComment" onClick={this.reseña}>Nuevo comentario</button>
+                              {this.state.onLine ? <button type="button" className="btn btnNewComment" onClick={this.reseña}>Nuevo comentario</button> :
+                              <button type="button" className="btn btnNewComment" data-toggle="tooltip" data-placement="bottom" data-html="true" title=" <em>No puedes crear reseñas sin internet</em>"  disabled>Nuevo comentario</button>}  
                             </div>
                         </div>
                     </div>
