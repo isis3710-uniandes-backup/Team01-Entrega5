@@ -107,14 +107,27 @@ export default class Listas extends Component {
         })
     }
 
-    actualizarUniversidades = (pUniversidades, pNombrePrograma) => {
+    actualizarUniversidades = (pUniversidades, pNombrePrograma) => 
+    {
         let token = Cookies.get("JSESSIONID");
         let universidadesNuevas;
-        if (!navigator.onLine) {
+        if (!navigator.onLine) 
+        {
             if (localStorage.getItem(`universidades${pNombrePrograma}`) === null) {
-                //aun no se que hacer
+                toast('No se lograron cargar las universidades, esperamos que pronto tenga internet.', 
+                {
+                    containerId: 'A',
+                    position: "bottom-right",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
+
             }
-            else {
+            else 
+            {
                 let info = localStorage.getItem(`universidades${pNombrePrograma}`);
                 this.setState({
                     universidades: JSON.parse(info),
@@ -127,7 +140,6 @@ export default class Listas extends Component {
         else {
             if (token) {
                 let urlServer = "https://futureguide.herokuapp.com";
-                //let urlServer = "http://localhost:3001";
                 fetch(urlServer + `/programas/${pNombrePrograma}/universidades/detail`, {
                     method: 'GET',
                     headers: new Headers({
@@ -148,7 +160,8 @@ export default class Listas extends Component {
             }
         }
     }
-    changeCosto = (event, newValue) => {
+    changeCosto = (event, newValue) => 
+    {
         this.setState({
             costoRange: newValue,
             universidades: this.state.universidadesTotal.filter(element => {
@@ -162,7 +175,8 @@ export default class Listas extends Component {
         });
     }
 
-    render() {
+    render() 
+    {
         console.log(this.state);
         let token = Cookies.get("JSESSIONID");
         if (!token) {

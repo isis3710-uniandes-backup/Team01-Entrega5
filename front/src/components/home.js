@@ -69,7 +69,7 @@ export default class home extends Component {
         this.setState({ logIn: false, alreadyLogged: false });
     };
     cierreExitoso = () => {
-
+        // TO DO: Falta revisar PWA.
         this.setState({ logIn: false, alreadyLogged: true }, () => {
             let botones = document.getElementsByClassName("initialBtns");
             for (let index = 0; index < botones.length; index++) {
@@ -142,10 +142,13 @@ export default class home extends Component {
         }
         if(navigator.onLine)
         {
-            alert("Hey");
             let token = Cookies.get("JSESSIONID");
 
-            if (token) {
+            if (token) 
+            {
+                this.setState({
+                    alreadyLogged : true
+                })
                 fetch("https://futureguide.herokuapp.com/programas/area", 
                 {
                     method: 'GET',
@@ -155,10 +158,12 @@ export default class home extends Component {
                 })
                     .then(res => res.json())
                     .then(json => {
-                        if (json.success === false) {
+                        if (json.success === false) 
+                        {
                             this.setState({
                                 alreadyLogged : false
-                            }, () => {
+                            }, () => 
+                            {
                                 Cookies.remove('JSESSIONID');
                             });
                         }
@@ -182,21 +187,27 @@ export default class home extends Component {
                         console.log(error);
                     })
             }
+            else
+            {
+                console.log("hh");
+            }
         }
         else 
         {
+            console.log("kk");
             this.setState({
                 alreadyLogged : true
-            });
-            toast('No hay internet pero puedes acceder a nuestro contenido', 
-            {
-                containerId: 'A',
-                position: "bottom-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true
+            }, () => {
+                toast('No hay internet pero puedes acceder a nuestro contenido', 
+                {
+                    containerId: 'A',
+                    position: "bottom-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
             });
 
         }
