@@ -9,6 +9,7 @@ import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import cap from '../assets/imgs/graduate-cap.png'
 import { toast } from 'react-toastify';
+import Estadisticas from './estadisticas';
 
 export default class Listas extends Component {
     constructor(props) {
@@ -20,7 +21,8 @@ export default class Listas extends Component {
             universidades: [],
             nombrePrograma: "",
             programClicked: false,
-            costoRange: [0, 25000000]
+            costoRange: [0, 25000000],
+            estadisticas: false
         }
     }
 
@@ -80,7 +82,15 @@ export default class Listas extends Component {
             }
         }
     }
+    
+    closeEstadisticas = () => {
+        this.setState({ estadisticas: false });
+        console.log("El estado es: "+this.state.estadisticas)
+    };
 
+    openEstadisticas = () => {
+        this.setState({ estadisticas: true })
+    };
 
     changePrograms = (e) => {
         this.setState({
@@ -172,7 +182,7 @@ export default class Listas extends Component {
                 {this.state.programClicked ?
                     <>
                         <Col className="col-6" id="ListaUniversidades" >
-                            <div className="col-12" id="filterBox">
+                            <div className="col-12 " id="filterBox">
                                 <h1 className="text-center" id="filtrosTitle">Filtros</h1>
                                 <div className="row">
                                     <div className="col-md-6 col-xl-6 col-12 ">
@@ -194,9 +204,12 @@ export default class Listas extends Component {
                                     </div>
                                     <div className="col-md-6 col-xl-6 col-12 ">
                                         <input className="form-control form-control-sm searchprogramInput" type="text" placeholder="Buscar universidad..." onChange={this.changeUniversities} aria-label="Input para buscar una universidad"></input>
-                                        <button className="btn btnStats">Estadísticas <i className="fas fa-chart-bar"></i></button>
+                                        <button className="btn btnStats" onClick={this.openEstadisticas}>Estadísticas 
+                                        <i className="fas fa-chart-bar"></i><Estadisticas mostrar={this.state.estadisticas} cerrar={this.closeEstadisticas} 
+                                        universidades={this.state.universidades}/></button>
                                     </div>
                                 </div>
+                                <br></br>
                             </div>
                             <div className="scrollbar scrollbar-universidades">
                                 <ListUniversidades nombrePrograma={this.state.nombrePrograma} universidades={this.state.universidades}></ListUniversidades>

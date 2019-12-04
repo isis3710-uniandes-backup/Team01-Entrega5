@@ -38,6 +38,7 @@ export default class register extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.mostrar !== prevProps.mostrar) {
             this.setState({ show: this.props.mostrar });
+            console.log("se cambió a :"+ this.props.mostrar )
         }
     }
 
