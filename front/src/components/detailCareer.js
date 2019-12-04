@@ -28,9 +28,11 @@ export default class detailCareer extends Component {
 
     componentDidMount() {
         let { nombre, name } = this.props.match.params;
-
+        nombre = nombre.replace("+", "");
+        nombre = nombre.replace("+", "");
         if(!navigator.onLine)
         {
+            console.log(`u${nombre}p${name}`);
             if(localStorage.getItem(`u${nombre}p${name}`) === null)
             {
                 this.setState({
@@ -66,8 +68,7 @@ export default class detailCareer extends Component {
             let token = Cookies.get("JSESSIONID");
             if (token) 
             {
-                nombre = nombre.replace("+", "");
-                nombre = nombre.replace("+", "");
+               
                 fetch(`https://futureguide.herokuapp.com/carrera/${nombre.toUpperCase()}/${name.toUpperCase()}`, {
                     method: 'GET',
                     headers: new Headers({
