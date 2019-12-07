@@ -8,6 +8,8 @@ import cashImage from "../assets/imgs/cash.png"
 import acreditacionInternacionalImg from "../assets/imgs/global-marketing.png"
 import "../styles/detailCareer.css";
 import Swal from "sweetalert2";
+import { FormattedMessage } from 'react-intl';
+
 const formatter = new Intl.NumberFormat("en-US",{
     style : 'currency',
     currency : 'COP',
@@ -198,22 +200,22 @@ export default class detailCareer extends Component {
                             <div className="col-lg-6 col-xl-6 col-md-6 col-12">
                                 <h1 id="programName">{this.state.programa}</h1>
                                 <h2 id="universityyName">{this.state.universidad}</h2>
-                                {this.state.altaCalidad ? <span className="badge badge-calite">Alta calidad</span> : false}
+                                {this.state.altaCalidad ? <span className="badge badge-calite"><FormattedMessage id='highQuality' /></span> : false}
                                 <br />
-                                <strong>Costo semestre </strong>
+                                <strong><FormattedMessage id='semesterCost' />: </strong>
                                 <strong className="atributosCareer">{ typeof this.state.costo === 'number' ? formatter.format(this.state.costo) : this.state.costo}</strong>
 
                             </div>
                             <ul className="col-lg-6 col-xl-6 col-md-6 col-12x   list-group list-group-flush">
                                 <li className="list-group-item  d-flex justify-content-between align-items-center">
                                     <img src={timeImage} className="img-fluid img-responsive img-Little" alt="Duracion de la carrera" />
-                                    <strong className="atributosCareer">{this.state.duracion} </strong> <strong className=" cursiveAnotation text-right">semestres.</strong>
+                                    <strong className="atributosCareer">{this.state.duracion} </strong> <strong className=" cursiveAnotation text-right"><FormattedMessage id='semesters' /></strong>
                                 </li>
                                 <li className="list-group-item  d-flex justify-content-between align-items-center" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Salario <em>promedio</em>">
                                     <img src={cashImage} className="img-fluid img-responsive img-Little" alt="Duracion de la carrera" />
                                     <p className="atributosCareer">{
                                         formatter.format(this.state.salario)
-                                    }</p> <strong className=" cursiveAnotation text-right">en promedio.</strong>
+                                    }</p> <strong className=" cursiveAnotation text-right"><FormattedMessage id='inAverage' /></strong>
                                 </li>
                                 {this.state.acreditacionInternacional ? <li className="list-group-item  d-flex justify-content-between align-items-center">
                                     <img src={acreditacionInternacionalImg} className="img-fluid img-responsive img-Little" alt="Duracion de la carrera" />
@@ -227,11 +229,11 @@ export default class detailCareer extends Component {
                                     {this.state.comentarios.length > 1 ? <>
                                         <a className="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
                                             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span className="sr-only">Previous</span>
+                                            <span className="sr-only"><FormattedMessage id='previous' /></span>
                                         </a>
                                         <a className="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
                                             <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span className="sr-only">Next</span>
+                                            <span className="sr-only"><FormattedMessage id='next' /></span>
                                         </a>
                                     </> : false}
                                 </div>
@@ -251,7 +253,7 @@ export default class detailCareer extends Component {
                                                     <div className="card-body">
                                                         <blockquote className="blockquote mb-0">
                                                             <p className="comentarioDescripcion">"{this.state.comentarios[0].descripcion}"</p>
-                                                            {this.state.comentarios[0].recomendada ? <span className="badge badge-style badge-recomendada">Recomendada</span> : <span className="badge badge-style badge-nrecomendada">No recomendada</span>}
+                                                            {this.state.comentarios[0].recomendada ? <span className="badge badge-style badge-recomendada"><FormattedMessage id='recommended' /></span> : <span className="badge badge-style badge-nrecomendada"><FormattedMessage id='notRecommended' /></span>}
                                                         </blockquote>
                                                     </div>
                                                 </div>
@@ -264,7 +266,7 @@ export default class detailCareer extends Component {
                                                 <div className="card-body">
                                                     <blockquote className="blockquote mb-0">
                                                         <p className="comentarioDescripcion">"{el.descripcion}"</p>
-                                                        {el.recomendada ? <span className="badge badge-style badge-recomendada">Recomendada</span> : <span className="badge badge-style badge-nrecomendada">No recomendada</span>}
+                                                        {el.recomendada ? <span className="badge badge-style badge-recomendada"><FormattedMessage id='recommended' /></span> : <span className="badge badge-style badge-nrecomendada"><FormattedMessage id='notRecommended' /></span>}
                                                     </blockquote>
                                                 </div>
                                             </div>
@@ -275,13 +277,13 @@ export default class detailCareer extends Component {
                         </div>
                         <div className="row boton">
                             <div className="col-12 text-center">
-                              {this.state.onLine ? <button type="button" className="btn btnNewComment" onClick={this.reseña}>Nuevo comentario</button> :
-                              <button type="button" className="btn btnNewComment" data-toggle="tooltip" data-placement="bottom" data-html="true" title=" <em>No puedes crear reseñas sin internet</em>"  disabled>Nuevo comentario</button>}  
+                              {this.state.onLine ? <button type="button" className="btn btnNewComment" onClick={this.reseña}><FormattedMessage id='newComment' /></button> :
+                              <button type="button" className="btn btnNewComment" data-toggle="tooltip" data-placement="bottom" data-html="true" title=" <em>No puedes crear reseñas sin internet</em>"  disabled><FormattedMessage id='newComment' /></button>}  
                             </div>
                         </div>
                     </div>
                     <div className="col-5 d-none d-md-block text-center" id="videosColumn">
-                        <h2>Videos</h2>
+                        <h2><FormattedMessage id='videos' /></h2>
                         <div className="scrollbar scrollbar-videos" tabIndex="0">
                             {this.state.videos.map((element, index) =>
                                 <div key={index} className="embed-responsive embed-responsive-16by9 videos">
