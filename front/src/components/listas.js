@@ -85,7 +85,6 @@ export default class Listas extends Component {
     
     closeEstadisticas = () => {
         this.setState({ estadisticas: false });
-        console.log("El estado es: "+this.state.estadisticas)
     };
 
     openEstadisticas = () => {
@@ -177,7 +176,6 @@ export default class Listas extends Component {
 
     render() 
     {
-        console.log(this.state);
         let token = Cookies.get("JSESSIONID");
         if (!token) {
             return <Redirect to='/' />
@@ -219,8 +217,8 @@ export default class Listas extends Component {
                                     <div className="col-md-6 col-xl-6 col-12 ">
                                         <input className="form-control form-control-sm searchprogramInput" type="text" placeholder="Buscar universidad..." onChange={this.changeUniversities} aria-label="Input para buscar una universidad"></input>
                                         <button className="btn btnStats" onClick={this.openEstadisticas}>Estadísticas 
-                                        <i className="fas fa-chart-bar"></i><Estadisticas mostrar={this.state.estadisticas} cerrar={this.closeEstadisticas} 
-                                        universidades={this.state.universidades}/></button>
+                                        <i className="fas fa-chart-bar"></i></button><Estadisticas mostrar={this.state.estadisticas} cerrar={this.closeEstadisticas}
+                                        universidades={this.state.universidades}/>
                                     </div>
                                 </div>
                                 <br></br>

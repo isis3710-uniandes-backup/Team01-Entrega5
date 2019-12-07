@@ -7,15 +7,11 @@ export default class estadisticas extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
             universidades: this.props.universidades
         };
         this.hide = this.hide.bind(this);
     }
     componentDidUpdate(prevProps) {
-        if (this.props.mostrar !== prevProps.mostrar) {
-            this.setState({ show: this.props.mostrar });
-        }
         this.drawchart(this.state.universidades);
     }
     drawchart(data){
@@ -172,10 +168,11 @@ export default class estadisticas extends Component {
     hide() {
         this.props.cerrar();
     }
+
     render() {
         return (
         <div>
-            <Modal id="modalEstadisticas" show={this.state.show} onHide={this.hide}>
+            <Modal id="modalEstadisticas" show={this.props.mostrar} onHide={this.hide}>
                     <Modal.Header closeButton>
                         <Modal.Title>Compara por el criterio que desees</Modal.Title>
                     </Modal.Header>
