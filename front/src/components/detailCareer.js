@@ -27,17 +27,15 @@ export default class detailCareer extends Component {
         salario: 0,
         videos: [],
         comentarios: [],
-        comentariosPie : [0,0]
+        comentariosPie: [0, 0]
     }
 
-    componentDidMount() 
-    {
+    componentDidMount() {
         let { nombre, name } = this.props.match.params;
         nombre = nombre.replace("+", "");
         nombre = nombre.replace("+", "");
         if (!navigator.onLine) {
-            if (localStorage.getItem(`u${nombre}p${name}`) === null) 
-            {
+            if (localStorage.getItem(`u${nombre}p${name}`) === null) {
                 this.setState({
                     universidad: "NaN",
                     programa: "Nan",
@@ -82,20 +80,18 @@ export default class detailCareer extends Component {
                         json.comentarios.forEach((element, id) => {
                             let dataPIE = this.state.comentariosPie;
                             console.log(element.recomendada);
-                           if(element.recomendada === 'false' ||element.recomendada === false )
-                           {
+                            if (element.recomendada === 'false' || element.recomendada === false) {
                                 dataPIE[1]++;
-                               this.setState({
-                                   comentariosPie : dataPIE
-                               });
-                           }
-                           else
-                           {
-                            dataPIE[0]++;
-                            this.setState({
-                                comentariosPie : dataPIE
-                            });
-                           }
+                                this.setState({
+                                    comentariosPie: dataPIE
+                                });
+                            }
+                            else {
+                                dataPIE[0]++;
+                                this.setState({
+                                    comentariosPie: dataPIE
+                                });
+                            }
                         });
                         this.setState({
                             universidad: nombre,
@@ -170,19 +166,17 @@ export default class detailCareer extends Component {
                     });
                     let commentsPie = this.state.comentariosPie;
                     let recommended = true;
-                    if(result.value[2] === 0)
-                    {
+                    if (result.value[2] === 0) {
                         recommended = false;
                         commentsPie[1]++;
                     }
-                    else
-                    {
+                    else {
                         commentsPie[0]++;
                     }
                     let json = {
                         titulo: result.value[0],
                         descripcion: result.value[1],
-                        recomendada: recommended 
+                        recomendada: recommended
                     };
 
                     let boddy = JSON.stringify(json);
@@ -205,11 +199,11 @@ export default class detailCareer extends Component {
                             body: boddy
                         }).then(() => {
                             let coments = this.state.comentarios;
-                            
+
                             coments.push(json)
                             this.setState({
                                 comentarios: coments,
-                                comentariosPie : commentsPie
+                                comentariosPie: commentsPie
                             })
                         });
                     })
@@ -222,8 +216,8 @@ export default class detailCareer extends Component {
     }
     actualizarGraficoReseñas = () => {
         d3.selectAll("arc")
-        .data(this.state.comentariosPie)
-        .transition().duration(1000)
+            .data(this.state.comentariosPie)
+            .transition().duration(1000)
 
     }
     graficaReseñas = () => {
@@ -263,7 +257,7 @@ export default class detailCareer extends Component {
             .enter()
             .append("g")
             .attr("class", "arc")
-        
+
 
         //Draw arc paths
         arcs.append("path")
@@ -275,10 +269,10 @@ export default class detailCareer extends Component {
 
         let comentarios = this.state.comentarios.length;
         arcs.append("text")
-            .attr("transform", function(d) { 
-                     return "translate(" + label.centroid(d) + ")"; 
-             })
-            .text(function(d, index) {  if(d.value > 0){return `${((d.value/comentarios)*100).toFixed(2)}%`}else{return ""} })
+            .attr("transform", function (d) {
+                return "translate(" + label.centroid(d) + ")";
+            })
+            .text(function (d, index) { if (d.value > 0) { return `${((d.value / comentarios) * 100).toFixed(2)}%` } else { return "" } })
             .attr("font-size", "8px")
             .attr("fill", "white")
 
@@ -372,11 +366,11 @@ export default class detailCareer extends Component {
                                     </div>
                                 </div>
                                 <div className="row boton">
-                            <div className="col-12 text-center">
-                            {this.state.onLine ? <button type="button" className="btn btnNewComment" onClick={this.reseña}><FormattedMessage id='newComment' /></button> :
-                                    <button type="button" className="btn btnNewComment" data-toggle="tooltip" data-placement="bottom" data-html="true" title=" <em>No puedes crear reseñas sin internet</em>" disabled><FormattedMessage id='newComment' /></button>}
-                            </div>
-                        </div>
+                                    <div className="col-12 text-center">
+                                        {this.state.onLine ? <button type="button" className="btn btnNewComment" onClick={this.reseña}><FormattedMessage id='newComment' /></button> :
+                                            <button type="button" className="btn btnNewComment" data-toggle="tooltip" data-placement="bottom" data-html="true" title=" <em>No puedes crear reseñas sin internet</em>" disabled><FormattedMessage id='newComment' /></button>}
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
