@@ -133,7 +133,10 @@ body{
 #acreditacionInt{
     font-weight: 500;
 }
-
+#piechartCol{
+    margin: auto;
+    text-align: center;
+}
 
 @media (max-width: 885px) {
     #programName{

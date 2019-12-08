@@ -11,9 +11,9 @@ import Swal from "sweetalert2";
 import * as d3 from 'd3';
 import { FormattedMessage } from 'react-intl';
 
-const formatter = new Intl.NumberFormat("en-US",{
-    style : 'currency',
-    currency : 'COP',
+const formatter = new Intl.NumberFormat("en-US", {
+    style: 'currency',
+    currency: 'COP',
     minimumFractionDigits: 2
 })
 export default class detailCareer extends Component {
@@ -26,17 +26,17 @@ export default class detailCareer extends Component {
         acreditacionInternacional: "",
         salario: 0,
         videos: [],
-        comentarios: []
+        comentarios: [],
+        comentariosPie : [0,0]
     }
 
-    componentDidMount() {
+    componentDidMount() 
+    {
         let { nombre, name } = this.props.match.params;
         nombre = nombre.replace("+", "");
         nombre = nombre.replace("+", "");
-        if(!navigator.onLine)
-        {
-            console.log(`u${nombre}p${name}`);
-            if(localStorage.getItem(`u${nombre}p${name}`) === null)
+        if (!navigator.onLine) {
+            if (localStorage.getItem(`u${nombre}p${name}`) === null) 
             {
                 this.setState({
                     universidad: "NaN",
@@ -50,8 +50,7 @@ export default class detailCareer extends Component {
                     comentarios: []
                 });
             }
-            else
-            {
+            else {
                 let info = JSON.parse(localStorage.getItem(`u${nombre}p${name}`));
                 this.setState({
                     universidad: nombre,
@@ -63,15 +62,13 @@ export default class detailCareer extends Component {
                     salario: info.salario,
                     videos: info.videos,
                     comentarios: info.comentarios
-                })
+                }, () => this.graficaReseñas())
             }
         }
-        else
-        {
+        else {
             let token = Cookies.get("JSESSIONID");
-            if (token) 
-            {
-               
+            if (token) {
+
                 fetch(`https://futureguide.herokuapp.com/carrera/${nombre.toUpperCase()}/${name.toUpperCase()}`, {
                     method: 'GET',
                     headers: new Headers({
@@ -82,6 +79,24 @@ export default class detailCareer extends Component {
                     .then(res => res.json())
                     .then(json => {
                         localStorage.setItem(`u${nombre}p${name}`, JSON.stringify(json));
+                        json.comentarios.forEach((element, id) => {
+                            let dataPIE = this.state.comentariosPie;
+
+                           if(element.recomendada === 'false' ||element.recomendada === false )
+                           {
+                                dataPIE[1]++;
+                               this.setState({
+                                   comentariosPie : dataPIE
+                               });
+                           }
+                           else
+                           {
+                            dataPIE[0]++;
+                            this.setState({
+                                comentariosPie : dataPIE
+                            });
+                           }
+                        });
                         this.setState({
                             universidad: nombre,
                             programa: name,
@@ -92,8 +107,8 @@ export default class detailCareer extends Component {
                             salario: json.salario,
                             videos: json.videos,
                             comentarios: json.comentarios,
-                            onLine : true
-                        })
+                            onLine: true
+                        }, () => this.graficaReseñas())
                     })
             }
         }
@@ -153,12 +168,23 @@ export default class detailCareer extends Component {
                         let boton = botones[0];
                         boton.classList.remove("hidde");
                     });
-
+                    let commentsPie = this.state.comentariosPie;
+                    let recommended = true;
+                    if(result.value[2] === 0)
+                    {
+                        recommended = false;
+                        commentsPie[1]++;
+                    }
+                    else
+                    {
+                        commentsPie[0]++;
+                    }
                     let json = {
                         titulo: result.value[0],
                         descripcion: result.value[1],
-                        recomendada: result.value[2] === 0 ? false : true
+                        recomendada: recommended 
                     };
+
                     let boddy = JSON.stringify(json);
                     fetch(`https://futureguide.herokuapp.com/carrera/${this.state.universidad.toUpperCase()}/${this.state.programa.toUpperCase()}/${"comentarios"}`, {
                         method: 'POST',
@@ -179,20 +205,81 @@ export default class detailCareer extends Component {
                             body: boddy
                         }).then(() => {
                             let coments = this.state.comentarios;
+                            
                             coments.push(json)
                             this.setState({
-                                comentarios: coments
+                                comentarios: coments,
+                                comentariosPie : commentsPie
                             })
                         });
                     })
                 }
                 let botones = document.getElementsByClassName("btnNewComment");
-            let boton = botones[0];
-            boton.classList.remove("hidde");
+                let boton = botones[0];
+                boton.classList.remove("hidde");
             })
         }
     }
+    actualizarGraficoReseñas = () => {
+        d3.selectAll("arc")
+        .data(this.state.comentariosPie)
+        .transition().duration(1000)
+
+    }
     graficaReseñas = () => {
+        const width = 120;
+        const height = 200;
+
+        const canvas = d3.select(this.refs.aceptacionCanvas);
+        const svg = canvas.append("svg");
+        svg.attr("width", width);
+        svg.attr("height", height);
+        let radius = Math.min(width, height) / 2;
+
+        let g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+
+
+        var data = this.state.comentariosPie;
+
+
+        var color = d3.scaleOrdinal(['#005383', '#464655']);
+
+        // Generate the pie
+        var pie = d3.pie();
+
+        // Generate the arcs
+        var arc = d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius);
+
+        var label = d3.arc()
+            .outerRadius(radius)
+            .innerRadius(radius - 70);
+
+        //Generate groups
+        var arcs = g.selectAll("arc")
+            .data(pie(data))
+            .enter()
+            .append("g")
+            .attr("class", "arc")
+        
+
+        //Draw arc paths
+        arcs.append("path")
+            .attr("fill", function (d, i) {
+                return color(i);
+            })
+            .attr("d", arc);
+
+        let comentarios = this.state.comentarios.length;
+        arcs.append("text")
+            .attr("transform", function(d) { 
+                     return "translate(" + label.centroid(d) + ")"; 
+             })
+            .text(function(d, index) {  if(d.value > 0){return `${((d.value/comentarios)*100).toFixed(2)}%`}else{return ""} })
+            .attr("font-size", "8px")
+            .attr("fill", "white")
 
     }
     render() {
@@ -211,7 +298,7 @@ export default class detailCareer extends Component {
                                 {this.state.altaCalidad ? <span className="badge badge-calite"><FormattedMessage id='highQuality' /></span> : false}
                                 <br />
                                 <strong><FormattedMessage id='semesterCost' />: </strong>
-                                <strong className="atributosCareer">{ typeof this.state.costo === 'number' ? formatter.format(this.state.costo) : this.state.costo}</strong>
+                                <strong className="atributosCareer">{typeof this.state.costo === 'number' ? formatter.format(this.state.costo) : this.state.costo}</strong>
 
                             </div>
                             <ul className="col-lg-6 col-xl-6 col-md-6 col-12x   list-group list-group-flush">
@@ -231,13 +318,9 @@ export default class detailCareer extends Component {
                                 </li> : false}
                             </ul>
                         </div>
-                    {/*     <div className="row" ref="aceptacionCanvas">
-
-                        </div> */}
                         <div className="row d-flex justify-content-center">
-                             <div className="col-3">
-                                 <h1>GO!</h1>
-                             </div>
+                            <div className="col-3" id="piechartCol" ref="aceptacionCanvas">
+                            </div>
                             <div className="col-9 overflow">
                                 <div className="row justify-content-center" id="marginBottomRow">
                                     {this.state.comentarios.length > 1 ? <>
@@ -267,7 +350,7 @@ export default class detailCareer extends Component {
                                                     <div className="card-body">
                                                         <blockquote className="blockquote mb-0">
                                                             <p className="comentarioDescripcion">"{this.state.comentarios[0].descripcion}"</p>
-                                                            {this.state.comentarios[0].recomendada ? <span className="badge badge-style badge-recomendada"><FormattedMessage id='recommended' /></span> : <span className="badge badge-style badge-nrecomendada"><FormattedMessage id='notRecommended' /></span>}
+                                                            {(this.state.comentarios[0].recomendada || this.state.comentarios[0].recomendada === 'true') ? <span className="badge badge-style badge-recomendada"><FormattedMessage id='recommended' /></span> : <span className="badge badge-style badge-nrecomendada"><FormattedMessage id='notRecommended' /></span>}
                                                         </blockquote>
                                                     </div>
                                                 </div>
@@ -280,7 +363,7 @@ export default class detailCareer extends Component {
                                                 <div className="card-body">
                                                     <blockquote className="blockquote mb-0">
                                                         <p className="comentarioDescripcion">"{el.descripcion}"</p>
-                                                        {el.recomendada ? <span className="badge badge-style badge-recomendada"><FormattedMessage id='recommended' /></span> : <span className="badge badge-style badge-nrecomendada"><FormattedMessage id='notRecommended' /></span>}
+                                                        {(el.recomendada || el.recomendada === 'true') ? <span className="badge badge-style badge-recomendada"><FormattedMessage id='recommended' /></span> : <span className="badge badge-style badge-nrecomendada"><FormattedMessage id='notRecommended' /></span>}
                                                     </blockquote>
                                                 </div>
                                             </div>
@@ -291,8 +374,8 @@ export default class detailCareer extends Component {
                         </div>
                         <div className="row boton">
                             <div className="col-12 text-center">
-                              {this.state.onLine ? <button type="button" className="btn btnNewComment" onClick={this.reseña}><FormattedMessage id='newComment' /></button> :
-                              <button type="button" className="btn btnNewComment" data-toggle="tooltip" data-placement="bottom" data-html="true" title=" <em>No puedes crear reseñas sin internet</em>"  disabled><FormattedMessage id='newComment' /></button>}  
+                                {this.state.onLine ? <button type="button" className="btn btnNewComment" onClick={this.reseña}><FormattedMessage id='newComment' /></button> :
+                                    <button type="button" className="btn btnNewComment" data-toggle="tooltip" data-placement="bottom" data-html="true" title=" <em>No puedes crear reseñas sin internet</em>" disabled><FormattedMessage id='newComment' /></button>}
                             </div>
                         </div>
                     </div>
