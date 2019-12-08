@@ -11,6 +11,8 @@ import cap from '../assets/imgs/graduate-cap.png';
 import { toast } from 'react-toastify';
 import Estadisticas from './estadisticas';
 import { FormattedMessage } from 'react-intl';
+import localeEnMessages from "../locales/en";
+import localeEsMessages from "../locales/es";
 
 export default class Listas extends Component {
 	constructor(props) {
@@ -185,7 +187,7 @@ export default class Listas extends Component {
 						<input
 							className='form-control form-control-sm searchprogramInput'
 							type='text'
-							placeholder='Buscar programa...'
+							placeholder={navigator.language === 'en' ? "Search Program..." : "Buscar Programa..."}
 							onChange={this.changePrograms}
 							aria-label='Input para buscar un programa'
 						></input>
@@ -230,7 +232,7 @@ export default class Listas extends Component {
 										<input
 											className='form-control form-control-sm searchprogramInput'
 											type='text'
-											placeholder='Buscar universidad...'
+											placeholder={navigator.language === 'en' ? "Search University..." : "Buscar Universidad..."}
 											onChange={this.changeUniversities}
 											aria-label='Input para buscar una universidad'
 										></input>
@@ -238,7 +240,7 @@ export default class Listas extends Component {
 											className='btn btnStats'
 											onClick={this.openEstadisticas}
 										>
-											Estadísticas
+											<FormattedMessage id='statistics' />
 											<i className='fas fa-chart-bar'></i>
 										</button>
 										<Estadisticas

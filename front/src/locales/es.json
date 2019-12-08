@@ -36,5 +36,8 @@
 	"email": "Correo",
 	"review": "Reseña",
 	"go": "Ir",
-	"noReview": "Aun no tienes Reseñas. Por favor ayudanos a mejorar nuestra plataforma dejando tus reseñas"
+	"noReview": "Aun no tienes Reseñas. Por favor ayudanos a mejorar nuestra plataforma dejando tus reseñas",
+
+	"statistics": "Estadisticas",
+	"searchProgram": "Buscar Programa..."
 }

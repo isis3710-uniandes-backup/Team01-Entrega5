@@ -36,5 +36,8 @@
 	"email": "Email",
 	"review": "Review",
 	"go": "Go",
-	"noReview": "No reviews. Please help us to improve the web site with your reviews."
+	"noReview": "No reviews. Please help us to improve the web site with your reviews.",
+
+	"statistics": "Statistics",
+	"searchProgram": "Search Program..."
 }
