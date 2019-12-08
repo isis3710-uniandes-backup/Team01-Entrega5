@@ -24,6 +24,7 @@ export default class estadisticas extends Component {
 			: this.setState({ chartText: chartTextEs });
 	}
 	drawchart(data) {
+		console.log(data)
 		let width = 450;
 		let height = 500;
 		let margin = { top: 25, left: 70, bottom: 150, right: 10 };

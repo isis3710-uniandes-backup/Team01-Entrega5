@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/perfil.css';
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { FormattedMessage } from 'react-intl';
@@ -51,6 +52,23 @@ export default class perfil extends Component {
 			]
 		};
 	}
+=======
+import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
+import { FormattedMessage } from 'react-intl';
+
+export default class perfil extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: Cookies.get("USERNAME"),
+            name: "",
+            email: "",
+            password: "***************",
+            comentarios:[]
+        }
+    }
+>>>>>>> 1fab2458d1321a16208e9127e8ae65ec63030c76
 
 	componentDidMount() {
 		let token = Cookies.get('JSESSIONID');
@@ -77,6 +95,7 @@ export default class perfil extends Component {
 		}
 	}
 
+<<<<<<< HEAD
 	render() {
 		return (
 			<div className='container-fluid perfil' role='main'>
@@ -181,4 +200,78 @@ export default class perfil extends Component {
 			</div>
 		);
 	}
+=======
+    render(){
+        return(
+            <div className="container-fluid perfil" role="main">
+                <div className="card mb-3 perfil_card" >
+                    <div className="row no-gutters">
+                        <div className="col-9">
+                            <div className="card-body perfil_body">
+                                <h1 className="card-title text-center perfil_title">{this.state.username}</h1>
+                                <div className="row">
+                                    <div className="col-6">
+                                        <div className="col-12">
+                                            <p className="card-text text-center perfil_text1"><b>
+                                                <FormattedMessage id='name' />
+                                            </b></p>
+                                        </div>
+                                        <div className="col-12">
+                                            <p className="card-text text-center perfil_text2">{this.state.name}</p>
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="col-12">
+                                            <p className="card-text text-center perfil_text1"><b>
+                                                <FormattedMessage id='email' />
+                                            </b></p>
+                                        </div>
+                                        <div className="col-12">
+                                            <p className="card-text text-center perfil_text2">{this.state.email}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-3 text-center">
+                            <img src="http://lorempixel.com/350/350/" className="card-img rounded-circle perfil_img"alt="Imagen Aleatoria de Perfil"></img>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-12 comentarios">
+                    {this.state.comentarios.length !== 0 ?
+                        <div className="row">
+                            <div className="col-2 boton-comentario">
+                                <div id="list-example" className="list-group">
+                                    {this.state.comentarios.map((e,index) =>
+                                        <a key={index} className="list-group-item list-group-item-action" href={"#list-item-"+(index)}><FormattedMessage id='review' /> {index+1}</a>
+                                    )}
+                                </div>
+                            </div>
+                            <div data-target="#list-example" data-offset="0" className="col-10 comentario scrollbar-primary scrollspy-example " tabIndex="0">
+                                {this.state.comentarios.map((e,i)=>
+                                    <div className="col-12 info-comentario" key={i}>
+                                        <h1 className="reseña-title" id={"list-item-"+(i)}><b>{e['titulo']}</b></h1>
+                                        <p>{e['descripcion']}</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>:
+                        <div className="row no-comentarios">
+                            <div className="col-12 text-center">
+                                <p><FormattedMessage id='noReview' /></p>
+                            </div>
+                            <div className="col-12 text-center">
+                                <Link to="/carreras">
+                                    <button type="button" className="btn btn-success"><FormattedMessage id='go' /></button>
+                                </Link>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        )
+    }
+>>>>>>> 1fab2458d1321a16208e9127e8ae65ec63030c76
 }
