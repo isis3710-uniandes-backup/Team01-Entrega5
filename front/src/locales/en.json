@@ -1,0 +1,29 @@
+{
+	"highQuality": "High Quality",
+	"filters": "Filters",
+	"semesterCost": "Semester Cost: ",
+	"semesters": "semesters",
+	"inAverage": "in average",
+	"previous": "Previous",
+	"next": "Next",
+	"recommended": "Recommended",
+	"notRecommended": "Not recommended",
+	"newComment": "New comment",
+	"videos": "Videos",
+
+	"nationalRanking": "National ranking ",
+	"internationalRanking": "International ranking ",
+	"address": "Address",
+	"cost": "Cost",
+
+	"criteria": "Compare by the criteria that you want",
+	"salary": "Salary",
+	"duration": "Duration",
+
+	"logIn": "Log in",
+	"register": "Register",
+	"logOut": "Log out",
+	"explore": "Look over",
+	"slogan": "Decide the best for your future",
+	"search": "Search"
+}
