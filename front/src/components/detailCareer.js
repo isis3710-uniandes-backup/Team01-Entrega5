@@ -8,6 +8,7 @@ import cashImage from "../assets/imgs/cash.png"
 import acreditacionInternacionalImg from "../assets/imgs/global-marketing.png"
 import "../styles/detailCareer.css";
 import Swal from "sweetalert2";
+import * as d3 from 'd3';
 import { FormattedMessage } from 'react-intl';
 
 const formatter = new Intl.NumberFormat("en-US",{
@@ -90,7 +91,8 @@ export default class detailCareer extends Component {
                             acreditacionInternacional: json.acreditacionInternacional,
                             salario: json.salario,
                             videos: json.videos,
-                            comentarios: json.comentarios
+                            comentarios: json.comentarios,
+                            onLine : true
                         })
                     })
             }
@@ -184,8 +186,14 @@ export default class detailCareer extends Component {
                         });
                     })
                 }
+                let botones = document.getElementsByClassName("btnNewComment");
+            let boton = botones[0];
+            boton.classList.remove("hidde");
             })
         }
+    }
+    graficaReseñas = () => {
+
     }
     render() {
         let token = Cookies.get("JSESSIONID");
@@ -223,8 +231,14 @@ export default class detailCareer extends Component {
                                 </li> : false}
                             </ul>
                         </div>
+                    {/*     <div className="row" ref="aceptacionCanvas">
+
+                        </div> */}
                         <div className="row d-flex justify-content-center">
-                            <div className="col-12 overflow">
+                             <div className="col-3">
+                                 <h1>GO!</h1>
+                             </div>
+                            <div className="col-9 overflow">
                                 <div className="row justify-content-center" id="marginBottomRow">
                                     {this.state.comentarios.length > 1 ? <>
                                         <a className="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">

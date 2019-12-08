@@ -96,6 +96,13 @@ export default class estadisticas extends Component {
 			g.append('g')
 				.classed('y--axis', true)
 				.call(d3.axisLeft(y));
+			g.append('g')
+			.classed('x--axis', true)
+			.call(d3.axisBottom(x))
+			.attr('transform', `translate(0, ${iheight})`)
+			.selectAll('text')
+			.attr('transform', 'translate(-10,0)rotate(-45)')
+			.style('text-anchor', 'end');
 			bar
 				.transition()
 				.attr('class', 'bar')
@@ -122,6 +129,13 @@ export default class estadisticas extends Component {
 			g.append('g')
 				.classed('y--axis', true)
 				.call(d3.axisLeft(y));
+			g.append('g')
+			.classed('x--axis', true)
+			.call(d3.axisBottom(x))
+			.attr('transform', `translate(0, ${iheight})`)
+			.selectAll('text')
+			.attr('transform', 'translate(-10,0)rotate(-45)')
+			.style('text-anchor', 'end');
 			bar
 				.transition()
 				.attr('class', 'bar')
@@ -148,13 +162,27 @@ export default class estadisticas extends Component {
 			g.append('g')
 				.classed('y--axis', true)
 				.call(d3.axisLeft(y));
+			g.append('g')
+			.classed('x--axis', true)
+			.call(d3.axisBottom(x))
+			.attr('transform', `translate(0, ${iheight})`)
+			.selectAll('text')
+			.attr('transform', 'translate(-10,0)rotate(-45)')
+			.style('text-anchor', 'end');
 			bar
 				.transition()
 				.attr('class', 'bar')
 				.style('fill', '#007dc6')
 				.attr('x', (d) => x(d.nombre))
 				.attr('y', (d) => y(d.costo))
-				.attr('height', (d) => iheight - y(d.costo))
+				.attr('height', function(d) {
+					if(d.costo !=="Basado en estrato social") {
+						console.log("En el if ");
+						return iheight - y(d.costo)}
+					else {
+						console.log("En el else");
+						return 0}
+				})
 				.attr('width', x.bandwidth());
 		});
 
@@ -174,6 +202,13 @@ export default class estadisticas extends Component {
 			g.append('g')
 				.classed('y--axis', true)
 				.call(d3.axisLeft(y));
+			g.append('g')
+			.classed('x--axis', true)
+			.call(d3.axisBottom(x))
+			.attr('transform', `translate(0, ${iheight})`)
+			.selectAll('text')
+			.attr('transform', 'translate(-10,0)rotate(-45)')
+			.style('text-anchor', 'end');
 			bar
 				.transition()
 				.attr('class', 'bar')
