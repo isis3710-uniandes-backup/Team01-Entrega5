@@ -22,8 +22,29 @@
 
 	"logIn": "Log in",
 	"register": "Register",
-	"logOut": "Log out",
+	"signOut": "Log out",
 	"explore": "Look over",
 	"slogan": "Decide the best for your future",
-	"search": "Search"
+	"search": "Search",
+
+	"username": "Username",
+	"password": "Password",
+	"close": "Close",
+	"logMe": "Log me",
+	"getIn": "Let's go again!",
+
+	"navigation": "Navigation",
+	"home": "Home",
+	"careers": "Careers",
+	"configuration": "Configuration",
+	"profile": "Profile",
+
+	"name": "Name",
+	"email": "Email",
+	"review": "Review",
+	"revPhrase": "You don't have reviews yet. Please help us improve our platform by leaving your reviews",
+	"go": "Go",
+
+	"regPhrase": "Join our community!",
+	"blank": "*Fill this field"
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../styles/detailUniversidad.css';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedNumber } from 'react-intl';
 
 export default class universidad extends Component {
 	constructor(props) {
@@ -72,7 +72,12 @@ export default class universidad extends Component {
 										{this.state.direccion}
 									</p>
 									<p>
-										<FormattedMessage id='cost' />: {this.state.costo}
+										<FormattedMessage id='cost' />:{' '}
+										{typeof this.state.costo === 'number' ? (
+											<FormattedNumber value={this.state.costo} />
+										) : (
+											this.state.costo
+										)}
 									</p>
 								</div>
 							</div>

@@ -7,7 +7,7 @@
 	"previous": "Anterior",
 	"next": "Siguiente",
 	"recommended": "Recomendada",
-	"notRecommended": "No recomendada",
+	"noRecommended": "No recomendada",
 	"newComment": "Nuevo comentario",
 	"videos": "Videos",
 
@@ -22,8 +22,29 @@
 
 	"logIn": "Iniciar sesión",
 	"register": "Registrarse",
-	"logOut": "Cerrar sesión",
+	"signOut": "Cerrar sesión",
 	"explore": "Explorar",
 	"slogan": "Decide lo mejor para tu futuro.",
-	"search": "Buscar"
+	"search": "Buscar",
+
+	"username": "Usuario",
+	"password": "Contraseña",
+	"close": "Cerrar",
+	"logMe": "Loguearme",
+	"getIn": "¡Vamos de nuevo!",
+
+	"navigation": "Navegación",
+	"home": "Inicio",
+	"careers": "Carreras",
+	"configuration": "Configuración",
+	"profile": "Perfil",
+
+	"name": "Nombre",
+	"email": "Correo",
+	"review": "Reseña",
+	"revPhrase": "Aun no tienes Reseñas. Por favor ayudanos a mejorar nuestra plataforma dejando tus reseñas",
+	"go": "Ir",
+
+	"regPhrase": "¡Únete a nuestra comunidad!",
+	"blank": "*Rellena este campo"
 }
