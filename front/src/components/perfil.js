@@ -11,21 +11,7 @@ export default class perfil extends Component{
             name: "",
             email: "",
             password: "***************",
-            comentarios:[{titulo: "Reseña 1", descripcion: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, eos explicabo fugit,\n" +
-                    "                                laboriosam libero, magnam maiores molestias nisi nobis officia praesentium quae sapiente suscipit ullam ut vitae voluptatem? Ab commodi earum fuga,\n" +
-                    "                                ipsum non praesentium quaerat temporibus unde! Aliquam animi dignissimos, doloremque eius enim molestiae nisi numquam quo repellendus sint."},
-                {titulo: "Reseña 2", descripcion: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, eos explicabo fugit,\n" +
-                        "                                laboriosam libero, magnam maiores molestias nisi nobis officia praesentium quae sapiente suscipit ullam ut vitae voluptatem? Ab commodi earum fuga,\n" +
-                        "                                ipsum non praesentium quaerat temporibus unde! Aliquam animi dignissimos, doloremque eius enim molestiae nisi numquam quo repellendus sint."},
-                {titulo: "Reseña 3", descripcion: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, eos explicabo fugit,\n" +
-                        "                                laboriosam libero, magnam maiores molestias nisi nobis officia praesentium quae sapiente suscipit ullam ut vitae voluptatem? Ab commodi earum fuga,\n" +
-                        "                                ipsum non praesentium quaerat temporibus unde! Aliquam animi dignissimos, doloremque eius enim molestiae nisi numquam quo repellendus sint."},
-                {titulo: "Reseña 4", descripcion: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, eos explicabo fugit,\n" +
-                        "                                laboriosam libero, magnam maiores molestias nisi nobis officia praesentium quae sapiente suscipit ullam ut vitae voluptatem? Ab commodi earum fuga,\n" +
-                        "                                ipsum non praesentium quaerat temporibus unde! Aliquam animi dignissimos, doloremque eius enim molestiae nisi numquam quo repellendus sint."},
-                {titulo: "Reseña 5", descripcion: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, eos explicabo fugit,\n" +
-                        "                                laboriosam libero, magnam maiores molestias nisi nobis officia praesentium quae sapiente suscipit ullam ut vitae voluptatem? Ab commodi earum fuga,\n" +
-                        "                                ipsum non praesentium quaerat temporibus unde! Aliquam animi dignissimos, doloremque eius enim molestiae nisi numquam quo repellendus sint."}]
+            comentarios:[]
         }
     }
 
