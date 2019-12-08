@@ -174,7 +174,14 @@ export default class estadisticas extends Component {
 				.style('fill', '#007dc6')
 				.attr('x', (d) => x(d.nombre))
 				.attr('y', (d) => y(d.costo))
-				.attr('height', (d) => iheight - y(d.costo))
+				.attr('height', function(d) {
+					if(d.costo !=="Basado en estrato social") {
+						console.log("En el if ");
+						return iheight - y(d.costo)}
+					else {
+						console.log("En el else");
+						return 0}
+				})
 				.attr('width', x.bandwidth());
 		});
 
