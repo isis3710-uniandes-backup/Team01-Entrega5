@@ -25,5 +25,16 @@
 	"logOut": "Cerrar sesión",
 	"explore": "Explorar",
 	"slogan": "Decide lo mejor para tu futuro.",
-	"search": "Buscar"
+	"search": "Buscar",
+
+	"navegation": "Navegación",
+	"careers": "Carreras",
+	"configuration": "Configuración",
+	"profile": "Perfil",
+
+	"name": "Nombre",
+	"email": "Correo",
+	"review": "Reseña",
+	"go": "Ir",
+	"noReview": "Aun no tienes Reseñas. Por favor ayudanos a mejorar nuestra plataforma dejando tus reseñas"
 }

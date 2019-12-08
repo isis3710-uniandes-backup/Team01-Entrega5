@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/perfil.css';
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import { FormattedMessage } from 'react-intl';
 
 export default class perfil extends Component{
     constructor(props) {
@@ -47,7 +48,9 @@ export default class perfil extends Component{
                                 <div className="row">
                                     <div className="col-6">
                                         <div className="col-12">
-                                            <p className="card-text text-center perfil_text1"><b>Nombre</b></p>
+                                            <p className="card-text text-center perfil_text1"><b>
+                                                <FormattedMessage id='name' />
+                                            </b></p>
                                         </div>
                                         <div className="col-12">
                                             <p className="card-text text-center perfil_text2">{this.state.name}</p>
@@ -55,7 +58,9 @@ export default class perfil extends Component{
                                     </div>
                                     <div className="col-6">
                                         <div className="col-12">
-                                            <p className="card-text text-center perfil_text1"><b>Correo</b></p>
+                                            <p className="card-text text-center perfil_text1"><b>
+                                                <FormattedMessage id='email' />
+                                            </b></p>
                                         </div>
                                         <div className="col-12">
                                             <p className="card-text text-center perfil_text2">{this.state.email}</p>
@@ -76,7 +81,7 @@ export default class perfil extends Component{
                             <div className="col-2 boton-comentario">
                                 <div id="list-example" className="list-group">
                                     {this.state.comentarios.map((e,index) =>
-                                        <a key={index} className="list-group-item list-group-item-action" href={"#list-item-"+(index)}>Reseña {index+1}</a>
+                                        <a key={index} className="list-group-item list-group-item-action" href={"#list-item-"+(index)}><FormattedMessage id='review' /> {index+1}</a>
                                     )}
                                 </div>
                             </div>
@@ -91,11 +96,11 @@ export default class perfil extends Component{
                         </div>:
                         <div className="row no-comentarios">
                             <div className="col-12 text-center">
-                                <p>Aun no tienes Reseñas. Por favor ayudanos a mejorar nuestra plataforma dejando tus reseñas</p>
+                                <p><FormattedMessage id='noReview' /></p>
                             </div>
                             <div className="col-12 text-center">
                                 <Link to="/carreras">
-                                    <button type="button" className="btn btn-success">Ir</button>
+                                    <button type="button" className="btn btn-success"><FormattedMessage id='go' /></button>
                                 </Link>
                             </div>
                         </div>

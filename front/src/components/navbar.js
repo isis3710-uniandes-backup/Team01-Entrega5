@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import { Link, Redirect } from "react-router-dom";
 import LogoCompleto from '../assets/imgs/LogoCompleto.png';
 import Register from './registro';
+import { FormattedMessage } from 'react-intl';
 const Swal = require('sweetalert2');
 
 export default class navbar extends Component {
@@ -114,7 +115,9 @@ export default class navbar extends Component {
                     <Link to="/">
                         <div className="logo"><img src={LogoCompleto} alt="Logo de FutureGuide"></img></div>
                     </Link>
-                    <div className="menu_section section_1"><h1 className="onlyForAxe">Navegación</h1></div>
+                    <div className="menu_section section_1"><h1 className="onlyForAxe">
+                        <FormattedMessage id='navegation' />
+                    </h1></div>
                     <div className="menu__wrap_1">
                         <div data-menu="main" className="menu__level">
                             <Link to="/">
@@ -125,24 +128,33 @@ export default class navbar extends Component {
                                 </div>
                             </Link>
                             <Link to="/carreras">
-                                <div className="menu__item"><div className="menu__link" ><i className="fas fa-graduation-cap"></i>Carreras</div></div>
+                                <div className="menu__item"><div className="menu__link" ><i className="fas fa-graduation-cap"></i>
+                                    <FormattedMessage id='careers' />
+                                </div></div>
                             </Link>
                         </div>
                     </div>
 
-                    <div className="menu_section section_2"><h1 className="onlyForAxe">Configuración</h1></div>
+                    <div className="menu_section section_2"><h1 className="onlyForAxe">
+                        <FormattedMessage id='configuration' />
+                    </h1></div>
                     <div className="menu__wrap_2">
                         <ul data-menu="main" className="menu__level">
-                            <li className="menu__item"><Link to="/perfil" className="menu__link" aria-label="Perfil" ><i className="fas fa-user-tie"></i>Perfil</Link></li>
+                            <li className="menu__item"><Link to="/perfil" className="menu__link" aria-label="Perfil" ><i className="fas fa-user-tie"></i>
+                                <FormattedMessage id='profile' />
+                            </Link></li>
                             {!this.state.alredyLogged ?
                                 <>
                                     <li className="menu__item">
-                                        <div className="menu__link" onClick={this.openLogIn}><i className="fas fa-sign-in-alt" ></i>Ingresar
+                                        <div className="menu__link" onClick={this.openLogIn}><i className="fas fa-sign-in-alt" ></i>
+
+                                            <FormattedMessage id='logIn' />
                                 <LogIn mostrar={this.state.logIn} cerrar={this.closeLogIn} />
                                         </div>
                                     </li>
                                     <li className="menu_movil__item">
-                                        <div className="menu__link" onClick={this.openRegistro}><i className="fas fa-sign-in-alt" />Registrarse
+                                        <div className="menu__link" onClick={this.openRegistro}><i className="fas fa-sign-in-alt" />
+                                            <FormattedMessage id='register' />
                                     <Register mostrar={this.state.registro} cerrar={this.closeRegistro} />
                                         </div>
                                     </li>
@@ -152,7 +164,7 @@ export default class navbar extends Component {
                                         state: true
                                     }}>
                                         <i className="fas fa-sign-out-alt"></i>
-                                        Salir
+                                        <FormattedMessage id='logOut' />
                                 </Link>
                                 </li>}
                         </ul>
@@ -165,7 +177,9 @@ export default class navbar extends Component {
                             <div className="row">
                                 <div className="col-6">
                                     <Link to="/carreras">
-                                        <div className="menu_movil__item"><div className="menu_movil__link carreras" ><i className="fas fa-graduation-cap"></i>Carreras</div></div>
+                                        <div className="menu_movil__item"><div className="menu_movil__link carreras" ><i className="fas fa-graduation-cap"></i>
+                                            <FormattedMessage id='careers' />
+                                        </div></div>
                                     </Link>
                                 </div>
                                 <div className="col-6">
@@ -179,10 +193,13 @@ export default class navbar extends Component {
                             <div className="row">
                                 <div className="col-6">
                                     {!this.state.alredyLogged ?
-                                        <div className="menu_movil__item"><div className="menu_movil__link carreras" onClick={this.openLogIn}><i className="fas fa-sign-in-alt"></i>Ingresar
+                                        <div className="menu_movil__item"><div className="menu_movil__link carreras" onClick={this.openLogIn}><i className="fas fa-sign-in-alt"></i>
+                                            <FormattedMessage id='logIn' />
                                                   <LogIn mostrar={this.state.logIn} cerrar={this.closeLogIn} />
                                         </div>
-                                        </div> : <Link to="/perfil"> <div className="menu_movil__item"><div className="menu_movil__link carreras" aria-label="Perfil"><i className="fas fa-user-tie"></i>Perfil</div></div></Link>
+                                        </div> : <Link to="/perfil"> <div className="menu_movil__item"><div className="menu_movil__link carreras" aria-label="Perfil"><i className="fas fa-user-tie"></i>
+                                            <FormattedMessage id='profile' />
+                                        </div></div></Link>
                                     }
 
                                 </div>
@@ -193,7 +210,7 @@ export default class navbar extends Component {
                                             state: true
                                         }}>
                                             <i className="fas fa-sign-out-alt"></i>
-                                            Salir
+                                            <FormattedMessage id='logOut' />
                                         </Link>
 
                                     </div>

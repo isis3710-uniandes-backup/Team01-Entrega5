@@ -25,5 +25,16 @@
 	"logOut": "Log out",
 	"explore": "Look over",
 	"slogan": "Decide the best for your future",
-	"search": "Search"
+	"search": "Search",
+
+	"navegation": "Navegation",
+	"careers": "Careers",
+	"configuration": "Configuration",
+	"profile": "Profile",
+
+	"name": "Name",
+	"email": "Email",
+	"review": "Review",
+	"go": "Go",
+	"noReview": "No reviews. Please help us to improve the web site with your reviews."
 }

@@ -81,7 +81,6 @@ export default class detailCareer extends Component {
                         localStorage.setItem(`u${nombre}p${name}`, JSON.stringify(json));
                         json.comentarios.forEach((element, id) => {
                             let dataPIE = this.state.comentariosPie;
-                            console.log(element.recomendada);
                            if(element.recomendada === 'false' ||element.recomendada === false )
                            {
                                 dataPIE[1]++;
