@@ -95,6 +95,13 @@ export default class estadisticas extends Component {
 			g.append('g')
 				.classed('y--axis', true)
 				.call(d3.axisLeft(y));
+			g.append('g')
+			.classed('x--axis', true)
+			.call(d3.axisBottom(x))
+			.attr('transform', `translate(0, ${iheight})`)
+			.selectAll('text')
+			.attr('transform', 'translate(-10,0)rotate(-45)')
+			.style('text-anchor', 'end');
 			bar
 				.transition()
 				.attr('class', 'bar')
@@ -121,6 +128,13 @@ export default class estadisticas extends Component {
 			g.append('g')
 				.classed('y--axis', true)
 				.call(d3.axisLeft(y));
+			g.append('g')
+			.classed('x--axis', true)
+			.call(d3.axisBottom(x))
+			.attr('transform', `translate(0, ${iheight})`)
+			.selectAll('text')
+			.attr('transform', 'translate(-10,0)rotate(-45)')
+			.style('text-anchor', 'end');
 			bar
 				.transition()
 				.attr('class', 'bar')
@@ -147,6 +161,13 @@ export default class estadisticas extends Component {
 			g.append('g')
 				.classed('y--axis', true)
 				.call(d3.axisLeft(y));
+			g.append('g')
+			.classed('x--axis', true)
+			.call(d3.axisBottom(x))
+			.attr('transform', `translate(0, ${iheight})`)
+			.selectAll('text')
+			.attr('transform', 'translate(-10,0)rotate(-45)')
+			.style('text-anchor', 'end');
 			bar
 				.transition()
 				.attr('class', 'bar')
@@ -173,6 +194,13 @@ export default class estadisticas extends Component {
 			g.append('g')
 				.classed('y--axis', true)
 				.call(d3.axisLeft(y));
+			g.append('g')
+			.classed('x--axis', true)
+			.call(d3.axisBottom(x))
+			.attr('transform', `translate(0, ${iheight})`)
+			.selectAll('text')
+			.attr('transform', 'translate(-10,0)rotate(-45)')
+			.style('text-anchor', 'end');
 			bar
 				.transition()
 				.attr('class', 'bar')
