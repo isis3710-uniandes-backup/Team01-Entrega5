@@ -81,7 +81,7 @@ export default class detailCareer extends Component {
                         localStorage.setItem(`u${nombre}p${name}`, JSON.stringify(json));
                         json.comentarios.forEach((element, id) => {
                             let dataPIE = this.state.comentariosPie;
-
+                            console.log(element.recomendada);
                            if(element.recomendada === 'false' ||element.recomendada === false )
                            {
                                 dataPIE[1]++;
@@ -268,6 +268,7 @@ export default class detailCareer extends Component {
         //Draw arc paths
         arcs.append("path")
             .attr("fill", function (d, i) {
+                console.log(d.value);
                 return color(i);
             })
             .attr("d", arc);
@@ -370,14 +371,15 @@ export default class detailCareer extends Component {
                                         </div>)}
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="row boton">
+                                <div className="row boton">
                             <div className="col-12 text-center">
-                                {this.state.onLine ? <button type="button" className="btn btnNewComment" onClick={this.reseña}><FormattedMessage id='newComment' /></button> :
+                            {this.state.onLine ? <button type="button" className="btn btnNewComment" onClick={this.reseña}><FormattedMessage id='newComment' /></button> :
                                     <button type="button" className="btn btnNewComment" data-toggle="tooltip" data-placement="bottom" data-html="true" title=" <em>No puedes crear reseñas sin internet</em>" disabled><FormattedMessage id='newComment' /></button>}
                             </div>
                         </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div className="col-5 d-none d-md-block text-center" id="videosColumn">
                         <h2><FormattedMessage id='videos' /></h2>
