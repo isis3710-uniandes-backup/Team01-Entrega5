@@ -275,7 +275,7 @@ export default class home extends Component {
 								</button>
 							</Link>
 							<button className='btn initialBtns' onClick={this.closeSession}>
-								<FormattedMessage id='logOut' />
+								<FormattedMessage id='signOut' />
 							</button>
 						</div>
 					)}

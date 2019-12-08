@@ -25,6 +25,7 @@ export default class futureguide extends Component {
 							<Register logueado={this.state.logueado} />
 						</Route>
 						<Route path='*'>
+
 							<Navbar />
 							<Switch>
 								<Route exact path='/perfil' component={Perfil} />

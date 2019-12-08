@@ -30,11 +30,13 @@ export default class detailCareer extends Component {
         comentariosPie: [0, 0]
     }
 
-    componentDidMount() {
+    componentDidMount() 
+    {
         let { nombre, name } = this.props.match.params;
         nombre = nombre.replace("+", "");
         nombre = nombre.replace("+", "");
-        if (!navigator.onLine) {
+        if (!navigator.onLine) 
+        {
             if (localStorage.getItem(`u${nombre}p${name}`) === null) {
                 this.setState({
                     universidad: "NaN",
@@ -48,7 +50,8 @@ export default class detailCareer extends Component {
                     comentarios: []
                 });
             }
-            else {
+            else 
+            {
                 let info = JSON.parse(localStorage.getItem(`u${nombre}p${name}`));
                 this.setState({
                     universidad: nombre,
@@ -63,7 +66,8 @@ export default class detailCareer extends Component {
                 }, () => this.graficaReseñas())
             }
         }
-        else {
+        else 
+        {
             let token = Cookies.get("JSESSIONID");
             if (token) {
 
@@ -110,7 +114,8 @@ export default class detailCareer extends Component {
         }
     }
 
-    reseña = () => {
+    reseña = () => 
+    {
         let token = Cookies.get("JSESSIONID");
         if (token) {
             let botones = document.getElementsByClassName("btnNewComment");
@@ -214,13 +219,15 @@ export default class detailCareer extends Component {
             })
         }
     }
-    actualizarGraficoReseñas = () => {
+    actualizarGraficoReseñas = () => 
+    {
         d3.selectAll("arc")
             .data(this.state.comentariosPie)
             .transition().duration(1000)
 
     }
-    graficaReseñas = () => {
+    graficaReseñas = () => 
+    {
         const width = 120;
         const height = 200;
 
@@ -277,7 +284,8 @@ export default class detailCareer extends Component {
             .attr("fill", "white")
 
     }
-    render() {
+    render() 
+    {
         let token = Cookies.get("JSESSIONID");
         if (!token) {
             return <Redirect to='/' />
