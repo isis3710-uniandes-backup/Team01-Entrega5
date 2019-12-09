@@ -33,8 +33,9 @@ export default class estadisticas extends Component {
 	}
 	drawchart(data) {
 		let modalBody = document.getElementById("theBody");
-		let width = modalBody !== null ? (modalBody.offsetWidth - 20) : 400;
-		let height = modalBody !== null ? (modalBody.offsetHeight - 20) : 450;
+		console.log(modalBody);
+		let width =  400;
+		let height =  450;
 		let margin = { top: 25, left: 70, bottom: 150, right: 10 };
 		let iwidth = width - margin.left - margin.right;
 		let iheight = height - margin.top - margin.bottom;
