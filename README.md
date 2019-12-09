@@ -4,6 +4,7 @@
 * [FutureGuideVideo](https://www.youtube.com/watch?v=VshXXhN3a8k) - Video Propuesta
 * [FutureGuideApp](https://www.youtube.com/watch?v=8XH0sIwwerQ) - Video Funcionalidades Parte 1 (Ingles)
 * [FutureGuideApp](https://youtu.be/z2ddwnfWDug) - Video Funcionalidades Parte 2 (Español)
+* [FutureGuideApp](https://youtu.be/gqsHAPAX2qs) - Video Funcionalidades Parte 3 (PWA)
 * [Página Web](http://futureguide.herokuapp.com/) - Link de la página web
 
 ### Descripción
