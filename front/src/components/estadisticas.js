@@ -110,7 +110,8 @@ export default class estadisticas extends Component {
 				.attr('x', (d) => x(d.nombre))
 				.attr('y', (d) => y(d.puestoNacional))
 				.attr('height', (d) => iheight - y(d.puestoNacional))
-				.attr('width', x.bandwidth());
+				.attr('width', x.bandwidth())
+				.duration(1500);
 		});
 
 		d3.select(this.refs.salario).on('click', function() {
@@ -143,7 +144,8 @@ export default class estadisticas extends Component {
 				.attr('x', (d) => x(d.nombre))
 				.attr('y', (d) => y(d.salario))
 				.attr('height', (d) => iheight - y(d.salario))
-				.attr('width', x.bandwidth());
+				.attr('width', x.bandwidth())
+				.duration(1500);
 		});
 
 		d3.select(this.refs.costo).on('click', function() {
@@ -183,7 +185,8 @@ export default class estadisticas extends Component {
 						console.log("En el else");
 						return 0}
 				})
-				.attr('width', x.bandwidth());
+				.attr('width', x.bandwidth())
+				.duration(1500);
 		});
 
 		d3.select(this.refs.duracion).on('click', function() {
@@ -216,7 +219,8 @@ export default class estadisticas extends Component {
 				.attr('x', (d) => x(d.nombre))
 				.attr('y', (d) => y(d.duracion))
 				.attr('height', (d) => iheight - y(d.duracion))
-				.attr('width', x.bandwidth());
+				.attr('width', x.bandwidth())
+				.duration(1500);
 		});
 	}
 	hide() {
