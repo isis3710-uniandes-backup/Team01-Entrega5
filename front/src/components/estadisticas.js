@@ -223,7 +223,7 @@ export default class estadisticas extends Component {
 				.transition()
 				.attr('class', 'bar')
 				.style('fill', '#00a0ce')
-				.attr('x', (d) => { console.log(d.nombre); x(d.nombre) })
+				.attr('x', (d) => x(d.nombre))
 				.attr('y', (d) => y(d.duracion))
 				.attr('height', (d) => iheight - y(d.duracion))
 				.attr('width', x.bandwidth())
