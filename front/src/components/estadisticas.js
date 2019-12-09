@@ -16,14 +16,13 @@ export default class estadisticas extends Component {
 		this.hide = this.hide.bind(this);
 	}
 	componentDidUpdate(prevProps) {
-		if (this.props.universidades !== prevProps.universidades) 
-        {
-            this.setState(
-                {
-                    universidades: this.props.universidades,
-                }
-            );
-        }
+		if (this.props.universidades !== prevProps.universidades) {
+			this.setState(
+				{
+					universidades: this.props.universidades,
+				}
+			);
+		}
 		this.drawchart(this.state.universidades);
 	}
 	componentDidMount() {
@@ -88,7 +87,7 @@ export default class estadisticas extends Component {
 			.classed('y--axis', true)
 			.call(d3.axisLeft(y));
 
-		d3.select(this.refs.puesto).on('click', function() {
+		d3.select(this.refs.puesto).on('click', function () {
 			svg.selectAll('.y--axis').remove();
 			svg.selectAll('text').remove();
 			g.append('text')
@@ -105,12 +104,12 @@ export default class estadisticas extends Component {
 				.classed('y--axis', true)
 				.call(d3.axisLeft(y));
 			g.append('g')
-			.classed('x--axis', true)
-			.call(d3.axisBottom(x))
-			.attr('transform', `translate(0, ${iheight})`)
-			.selectAll('text')
-			.attr('transform', 'translate(-10,0)rotate(-45)')
-			.style('text-anchor', 'end');
+				.classed('x--axis', true)
+				.call(d3.axisBottom(x))
+				.attr('transform', `translate(0, ${iheight})`)
+				.selectAll('text')
+				.attr('transform', 'translate(-10,0)rotate(-45)')
+				.style('text-anchor', 'end');
 			bar
 				.transition()
 				.attr('class', 'bar')
@@ -122,7 +121,7 @@ export default class estadisticas extends Component {
 				.duration(1500);
 		});
 
-		d3.select(this.refs.salario).on('click', function() {
+		d3.select(this.refs.salario).on('click', function () {
 			svg.selectAll('.y--axis').remove();
 			svg.selectAll('text').remove();
 			g.append('text')
@@ -139,12 +138,12 @@ export default class estadisticas extends Component {
 				.classed('y--axis', true)
 				.call(d3.axisLeft(y));
 			g.append('g')
-			.classed('x--axis', true)
-			.call(d3.axisBottom(x))
-			.attr('transform', `translate(0, ${iheight})`)
-			.selectAll('text')
-			.attr('transform', 'translate(-10,0)rotate(-45)')
-			.style('text-anchor', 'end');
+				.classed('x--axis', true)
+				.call(d3.axisBottom(x))
+				.attr('transform', `translate(0, ${iheight})`)
+				.selectAll('text')
+				.attr('transform', 'translate(-10,0)rotate(-45)')
+				.style('text-anchor', 'end');
 			bar
 				.transition()
 				.attr('class', 'bar')
@@ -156,7 +155,7 @@ export default class estadisticas extends Component {
 				.duration(1500);
 		});
 
-		d3.select(this.refs.costo).on('click', function() {
+		d3.select(this.refs.costo).on('click', function () {
 			svg.selectAll('.y--axis').remove();
 			svg.selectAll('text').remove();
 			g.append('text')
@@ -173,21 +172,22 @@ export default class estadisticas extends Component {
 				.classed('y--axis', true)
 				.call(d3.axisLeft(y));
 			g.append('g')
-			.classed('x--axis', true)
-			.call(d3.axisBottom(x))
-			.attr('transform', `translate(0, ${iheight})`)
-			.selectAll('text')
-			.attr('transform', 'translate(-10,0)rotate(-45)')
-			.style('text-anchor', 'end');
+				.classed('x--axis', true)
+				.call(d3.axisBottom(x))
+				.attr('transform', `translate(0, ${iheight})`)
+				.selectAll('text')
+				.attr('transform', 'translate(-10,0)rotate(-45)')
+				.style('text-anchor', 'end');
 			bar
 				.transition()
 				.attr('class', 'bar')
 				.style('fill', '#007dc6')
 				.attr('x', (d) => x(d.nombre))
 				.attr('y', (d) => y(d.costo))
-				.attr('height', function(d) {
-					if(d.costo !=="Basado en estrato social") {
-						return iheight - y(d.costo)}
+				.attr('height', function (d) {
+					if (d.costo !== "Basado en estrato social") {
+						return iheight - y(d.costo)
+					}
 					else {
 						return 0
 					}
@@ -196,7 +196,7 @@ export default class estadisticas extends Component {
 				.duration(1500);
 		});
 
-		d3.select(this.refs.duracion).on('click', function() {
+		d3.select(this.refs.duracion).on('click', function () {
 			svg.selectAll('.y--axis').remove();
 			svg.selectAll('text').remove();
 			g.append('text')
@@ -213,17 +213,17 @@ export default class estadisticas extends Component {
 				.classed('y--axis', true)
 				.call(d3.axisLeft(y));
 			g.append('g')
-			.classed('x--axis', true)
-			.call(d3.axisBottom(x))
-			.attr('transform', `translate(0, ${iheight})`)
-			.selectAll('text')
-			.attr('transform', 'translate(-10,0)rotate(-45)')
-			.style('text-anchor', 'end');
+				.classed('x--axis', true)
+				.call(d3.axisBottom(x))
+				.attr('transform', `translate(0, ${iheight})`)
+				.selectAll('text')
+				.attr('transform', 'translate(-10,0)rotate(-45)')
+				.style('text-anchor', 'end');
 			bar
 				.transition()
 				.attr('class', 'bar')
 				.style('fill', '#00a0ce')
-				.attr('x', (d) => x(d.nombre))
+				.attr('x', (d) => { console.log(d.nombre); x(d.nombre) })
 				.attr('y', (d) => y(d.duracion))
 				.attr('height', (d) => iheight - y(d.duracion))
 				.attr('width', x.bandwidth())
@@ -242,28 +242,28 @@ export default class estadisticas extends Component {
 					show={this.props.mostrar}
 					onHide={this.hide}
 				>
-					<Modal.Header closeButton>
+					<Modal.Header className="text-center" closeButton>
 						<Modal.Title id="modaltitle">
 							<FormattedMessage id='criteria' />
 						</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<div ref='canvas'></div>
+						<div id="footerModal">
+							<Button variant='secondary' ref='costo'>
+								<FormattedMessage id='cost' />
+							</Button>
+							<Button variant='secondary' ref='salario'>
+								<FormattedMessage id='salary' />
+							</Button>
+							<Button variant='secondary' ref='puesto'>
+								<FormattedMessage id='nationalRanking' />
+							</Button>
+							<Button variant='secondary' ref='duracion'>
+								<FormattedMessage id='duration' />
+							</Button>
+						</div>
+						<div id="graficas" ref='canvas'></div>
 					</Modal.Body>
-					<Modal.Footer>
-						<Button variant='secondary' ref='costo'>
-							<FormattedMessage id='cost' />
-						</Button>
-						<Button variant='secondary' ref='salario'>
-							<FormattedMessage id='salary' />
-						</Button>
-						<Button variant='secondary' ref='puesto'>
-							<FormattedMessage id='nationalRanking' />
-						</Button>
-						<Button variant='secondary' ref='duracion'>
-							<FormattedMessage id='duration' />
-						</Button>
-					</Modal.Footer>
 				</Modal>
 			</div>
 		);

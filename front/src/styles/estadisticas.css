@@ -2,4 +2,13 @@
     font-weight: 100;
     font-size: smaller;
     color: #464343;
+    text-align: center;
+}
+#footerModal{
+    display: flex;
+    justify-content: center;
+}
+#graficas{
+    justify-content: center;
+    display: flex;
 }
