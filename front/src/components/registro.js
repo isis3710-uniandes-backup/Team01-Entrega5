@@ -3,6 +3,8 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import '../styles/registro.css';
 import { toast } from 'react-toastify';
 import { FormattedMessage } from 'react-intl';
+import registerEs from '../locales/registerEs.json';
+import registerEn from '../locales/registerEn.json';
 const md5 = require('md5');
 
 let checkUsername = true;
@@ -23,7 +25,8 @@ export default class register extends Component {
 			show: false,
 			usernameError: null,
 			emailError: null,
-			passwordError: null
+			passwordError: null,
+			placeholderMessages: {}
 		};
 		this.changeValue = this.changeValue.bind(this);
 		this.signUp = this.signUp.bind(this);
@@ -35,6 +38,13 @@ export default class register extends Component {
 			this.setState({ show: this.props.mostrar });
 			console.log('se cambió a :' + this.props.mostrar);
 		}
+	}
+
+	componentDidMount() {
+		let language = navigator.language || navigator.userLanguage;
+		language === 'en'
+			? this.setState({ placeholderMessages: registerEn })
+			: this.setState({ placeholderMessages: registerEs });
 	}
 
 	hide() {
@@ -223,7 +233,9 @@ export default class register extends Component {
 			<div>
 				<Modal show={this.state.show} onHide={this.hide}>
 					<Modal.Header closeButton>
-						<Modal.Title>¡Únete a nuestra comunidad!</Modal.Title>
+						<Modal.Title>
+							<FormattedMessage id='regPhrase' />
+						</Modal.Title>
 					</Modal.Header>
 					<Modal.Body id='Register'>
 						<Form>
@@ -241,7 +253,7 @@ export default class register extends Component {
 											? 'is-invalid register-form-control-username '
 											: 'register-form-control-username'
 									}`}
-									placeholder='Dinos como quieres que te llamemos... '
+									placeholder={this.state.placeholderMessages.phUsername}
 									onChange={this.changeValue}
 									title='Username'
 									aria-label='Username'
@@ -267,7 +279,7 @@ export default class register extends Component {
 									required
 									type='text'
 									className='form-control'
-									placeholder='Nombre '
+									placeholder={this.state.placeholderMessages.phName}
 									onChange={this.changeValue}
 									title='Nombre'
 									aria-label='Nombre'
@@ -291,7 +303,7 @@ export default class register extends Component {
 									className={`form-control ${
 										this.state.emailError ? 'is-invalid ' : ''
 									}`}
-									placeholder='Brindanos tu correo... '
+									placeholder={this.state.placeholderMessages.phEmail}
 									onChange={this.changeValue}
 									title='Correo'
 									aria-label='Correo'
@@ -316,7 +328,7 @@ export default class register extends Component {
 									className={`form-control ${
 										this.state.passwordError ? 'is-invalid ' : ''
 									}`}
-									placeholder='Contraseña '
+									placeholder={this.state.placeholderMessages.phPassword}
 									onChange={this.changeValue}
 									title='Completa este campo.'
 									aria-label='Contrasenia usada'
@@ -336,7 +348,7 @@ export default class register extends Component {
 					</Modal.Body>
 					<Modal.Footer>
 						<Button variant='secondary' onClick={this.hide}>
-							Cerrar
+							<FormattedMessage id='close' />
 						</Button>
 						<Button
 							id='but'
