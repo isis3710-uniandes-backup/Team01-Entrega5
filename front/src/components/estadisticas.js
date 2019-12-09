@@ -15,6 +15,14 @@ export default class estadisticas extends Component {
 		this.hide = this.hide.bind(this);
 	}
 	componentDidUpdate(prevProps) {
+		if (this.props.universidades !== prevProps.universidades) 
+        {
+            this.setState(
+                {
+                    universidades: this.props.universidades,
+                }
+            );
+        }
 		this.drawchart(this.state.universidades);
 	}
 	componentDidMount() {
