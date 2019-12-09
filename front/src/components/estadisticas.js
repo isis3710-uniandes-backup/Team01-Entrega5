@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 import { FormattedMessage } from 'react-intl';
 import chartTextEn from '../locales/chartTextEn.json';
 import chartTextEs from '../locales/chartTextEs.json';
+import '../styles/estadisticas.css';
 
 export default class estadisticas extends Component {
 	constructor(props) {
@@ -15,7 +16,7 @@ export default class estadisticas extends Component {
 		this.hide = this.hide.bind(this);
 	}
 	componentDidUpdate(prevProps) {
-		this.drawchart(this.state.universidades);
+		this.drawchart(this.props.universidades);
 	}
 	componentDidMount() {
 		let language = navigator.language || navigator.userLanguage;
@@ -24,7 +25,6 @@ export default class estadisticas extends Component {
 			: this.setState({ chartText: chartTextEs });
 	}
 	drawchart(data) {
-		console.log(data)
 		let width = 450;
 		let height = 500;
 		let margin = { top: 25, left: 70, bottom: 150, right: 10 };
@@ -179,11 +179,10 @@ export default class estadisticas extends Component {
 				.attr('y', (d) => y(d.costo))
 				.attr('height', function(d) {
 					if(d.costo !=="Basado en estrato social") {
-						console.log("En el if ");
 						return iheight - y(d.costo)}
 					else {
-						console.log("En el else");
-						return 0}
+						return 0
+					}
 				})
 				.attr('width', x.bandwidth())
 				.duration(1500);
@@ -236,7 +235,7 @@ export default class estadisticas extends Component {
 					onHide={this.hide}
 				>
 					<Modal.Header closeButton>
-						<Modal.Title>
+						<Modal.Title id="modaltitle">
 							<FormattedMessage id='criteria' />
 						</Modal.Title>
 					</Modal.Header>
