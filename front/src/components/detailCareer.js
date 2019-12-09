@@ -10,6 +10,25 @@ import "../styles/detailCareer.css";
 import Swal from "sweetalert2";
 import * as d3 from 'd3';
 import { FormattedMessage } from 'react-intl';
+const width = 120;
+const height = 200;
+
+
+let radius = Math.min(width, height) / 2;
+
+// Generate the arcs
+var arc = d3.arc()
+    .innerRadius(0)
+    .outerRadius(radius);
+
+var label = d3.arc()
+    .outerRadius(radius)
+    .innerRadius(radius - 70);
+    var pie = d3.pie();
+
+
+var color = d3.scaleOrdinal(['#005383', '#464655']);
+
 
 const formatter = new Intl.NumberFormat("en-US", {
     style: 'currency',
@@ -27,16 +46,15 @@ export default class detailCareer extends Component {
         salario: 0,
         videos: [],
         comentarios: [],
-        comentariosPie: [0, 0]
+        comentariosPie: [0, 0],
+        g : ""
     }
 
-    componentDidMount() 
-    {
+    componentDidMount() {
         let { nombre, name } = this.props.match.params;
         nombre = nombre.replace("+", "");
         nombre = nombre.replace("+", "");
-        if (!navigator.onLine) 
-        {
+        if (!navigator.onLine) {
             if (localStorage.getItem(`u${nombre}p${name}`) === null) {
                 this.setState({
                     universidad: "NaN",
@@ -50,8 +68,7 @@ export default class detailCareer extends Component {
                     comentarios: []
                 });
             }
-            else 
-            {
+            else {
                 let info = JSON.parse(localStorage.getItem(`u${nombre}p${name}`));
                 this.setState({
                     universidad: nombre,
@@ -66,8 +83,7 @@ export default class detailCareer extends Component {
                 }, () => this.graficaReseñas())
             }
         }
-        else 
-        {
+        else {
             let token = Cookies.get("JSESSIONID");
             if (token) {
 
@@ -83,7 +99,6 @@ export default class detailCareer extends Component {
                         localStorage.setItem(`u${nombre}p${name}`, JSON.stringify(json));
                         json.comentarios.forEach((element, id) => {
                             let dataPIE = this.state.comentariosPie;
-                            console.log(element.recomendada);
                             if (element.recomendada === 'false' || element.recomendada === false) {
                                 dataPIE[1]++;
                                 this.setState({
@@ -114,8 +129,7 @@ export default class detailCareer extends Component {
         }
     }
 
-    reseña = () => 
-    {
+    reseña = () => {
         let token = Cookies.get("JSESSIONID");
         if (token) {
             let botones = document.getElementsByClassName("btnNewComment");
@@ -209,7 +223,7 @@ export default class detailCareer extends Component {
                             this.setState({
                                 comentarios: coments,
                                 comentariosPie: commentsPie
-                            })
+                            }, () => this.actualizarGraficoReseñas())
                         });
                     })
                 }
@@ -218,46 +232,20 @@ export default class detailCareer extends Component {
                 boton.classList.remove("hidde");
             })
         }
-    }
-    actualizarGraficoReseñas = () => 
-    {
-        d3.selectAll("arc")
-            .data(this.state.comentariosPie)
-            .transition().duration(1000)
-
-    }
-    graficaReseñas = () => 
-    {
-        const width = 120;
-        const height = 200;
+    }   
+    graficaReseñas = () => {
 
         const canvas = d3.select(this.refs.aceptacionCanvas);
         const svg = canvas.append("svg");
         svg.attr("width", width);
         svg.attr("height", height);
-        let radius = Math.min(width, height) / 2;
-
-        let g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-
-
         var data = this.state.comentariosPie;
-
-
-        var color = d3.scaleOrdinal(['#005383', '#464655']);
-
+        let g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+        this.setState({
+            g : g
+        })
         // Generate the pie
-        var pie = d3.pie();
-
-        // Generate the arcs
-        var arc = d3.arc()
-            .innerRadius(0)
-            .outerRadius(radius);
-
-        var label = d3.arc()
-            .outerRadius(radius)
-            .innerRadius(radius - 70);
-
+        
         //Generate groups
         var arcs = g.selectAll("arc")
             .data(pie(data))
@@ -269,7 +257,6 @@ export default class detailCareer extends Component {
         //Draw arc paths
         arcs.append("path")
             .attr("fill", function (d, i) {
-                console.log(d.value);
                 return color(i);
             })
             .attr("d", arc);
@@ -284,8 +271,7 @@ export default class detailCareer extends Component {
             .attr("fill", "white")
 
     }
-    render() 
-    {
+    render() {
         let token = Cookies.get("JSESSIONID");
         if (!token) {
             return <Redirect to='/' />

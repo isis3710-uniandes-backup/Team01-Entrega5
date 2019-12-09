@@ -11,8 +11,6 @@ import cap from '../assets/imgs/graduate-cap.png';
 import { toast } from 'react-toastify';
 import Estadisticas from './estadisticas';
 import { FormattedMessage } from 'react-intl';
-import localeEnMessages from "../locales/en";
-import localeEsMessages from "../locales/es";
 
 export default class Listas extends Component {
 	constructor(props) {
