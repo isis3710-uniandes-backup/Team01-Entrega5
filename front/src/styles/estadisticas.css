@@ -12,3 +12,8 @@
     justify-content: center;
     display: flex;
 }
+.btn-modal{
+    padding: .2em;
+    font-size: 13px;
+    margin: 2px  ;
+}

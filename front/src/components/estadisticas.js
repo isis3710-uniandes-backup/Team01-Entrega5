@@ -32,8 +32,9 @@ export default class estadisticas extends Component {
 			: this.setState({ chartText: chartTextEs });
 	}
 	drawchart(data) {
-		let width = 450;
-		let height = 500;
+		let modalBody = document.getElementById("theBody");
+		let width = modalBody !== null ? (modalBody.offsetWidth - 20) : 400;
+		let height = modalBody !== null ? (modalBody.offsetHeight - 20) : 450;
 		let margin = { top: 25, left: 70, bottom: 150, right: 10 };
 		let iwidth = width - margin.left - margin.right;
 		let iheight = height - margin.top - margin.bottom;
@@ -247,18 +248,18 @@ export default class estadisticas extends Component {
 							<FormattedMessage id='criteria' />
 						</Modal.Title>
 					</Modal.Header>
-					<Modal.Body>
+					<Modal.Body id="theBody">
 						<div id="footerModal">
-							<Button variant='secondary' ref='costo'>
+							<Button className="btn-modal" variant='secondary' ref='costo'>
 								<FormattedMessage id='cost' />
 							</Button>
-							<Button variant='secondary' ref='salario'>
+							<Button className="btn-modal" variant='secondary' ref='salario'>
 								<FormattedMessage id='salary' />
 							</Button>
-							<Button variant='secondary' ref='puesto'>
+							<Button className="btn-modal" variant='secondary' ref='puesto'>
 								<FormattedMessage id='nationalRanking' />
 							</Button>
-							<Button variant='secondary' ref='duracion'>
+							<Button className="btn-modal" variant='secondary' ref='duracion'>
 								<FormattedMessage id='duration' />
 							</Button>
 						</div>
